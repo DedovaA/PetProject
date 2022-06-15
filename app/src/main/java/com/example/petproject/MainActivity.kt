@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.petproject.consts.uiConsts.ShowLoginScreen
-import com.example.petproject.consts.uiConsts.ShowRegisterScreen
+import com.example.petproject.loginScreen.ShowLoginScreen
+import com.example.petproject.loginScreen.ShowRegisterScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 private fun ShowScreen(){
-//    ShowLoginScreen()
-    ShowRegisterScreen()
+    ShowLoginScreen()
+//    ShowRegisterScreen()
 }
 
 
