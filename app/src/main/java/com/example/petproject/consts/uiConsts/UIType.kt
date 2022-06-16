@@ -7,28 +7,28 @@ import androidx.compose.ui.unit.sp
 import com.example.petproject.R
 
 // Set of Material typography styles to start with
-val main_button_text_style = TextStyle(
+val mainButtonTextStyle = TextStyle(
         fontFamily = FontFamily(Font(R.font.mulish_bold)),
         fontSize = 16.sp,
-        color = text_white
+        color = textWhite
     )
-val login_switch_button_text_style = TextStyle(
+val loginSwitchButtonTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_bold)),
     fontSize = 16.sp,
-    color = validation_black
+    color = validationBlack
 )
-val transparent_button_text_style = TextStyle(
+val transparentButtonTextStyle = TextStyle(
         fontFamily = FontFamily(Font(R.font.mulish_semi_bold)),
         fontSize = 16.sp,
-        color = validation_black
+        color = validationBlack
     )
-val auth_field_text_style = TextStyle(
+val authFieldTextStyle = TextStyle(
         fontFamily = FontFamily(Font(R.font.mulish_regular)),
         fontSize = 16.sp,
 
     )
-val error_caption_text_style = TextStyle(
+val errorCaptionTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_regular)),
     fontSize = 12.sp,
-    color = error_text_red
+    color = errorTextRed
 )

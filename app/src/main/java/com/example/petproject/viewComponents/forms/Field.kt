@@ -15,9 +15,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.petproject.consts.uiConsts.auth_field_text_style
-import com.example.petproject.consts.uiConsts.neutrals_gray
-import com.example.petproject.consts.uiConsts.validation_black
+import com.example.petproject.consts.uiConsts.authFieldTextStyle
+import com.example.petproject.consts.uiConsts.neutralsGray
+import com.example.petproject.consts.uiConsts.validationBlack
 
 @Preview
 @Composable
@@ -38,11 +38,11 @@ fun Field(hint: String = "name", inputType: KeyboardType = KeyboardType.Text) {
                 backgroundColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
-                placeholderColor = neutrals_gray,
-                textColor = validation_black
+                placeholderColor = neutralsGray,
+                textColor = validationBlack
             ),
             keyboardOptions = KeyboardOptions(keyboardType = inputType),
-            textStyle = auth_field_text_style,
+            textStyle = authFieldTextStyle,
             modifier = Modifier.fillMaxWidth()
         )
 

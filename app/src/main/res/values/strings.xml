@@ -17,4 +17,5 @@
     <string name="error_message_email">Неверный формат email. Пример: name@gmail.com</string>
     <string name="error_message_confirm_password">Не совпадает с введенным паролем</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="visibility_icon">Visibility Icon</string>
 </resources>

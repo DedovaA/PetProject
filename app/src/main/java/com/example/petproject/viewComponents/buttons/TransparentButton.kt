@@ -6,11 +6,8 @@ import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
 
 @Preview
@@ -20,13 +17,13 @@ fun TransparentButton(
 ) {
     TextButton(
         onClick = { },
-        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validation_black),
-        contentPadding = PaddingValues.Absolute(left = 32.dp, top = 18.dp, right = 32.dp, bottom = 18.dp),
+        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validationBlack),
+        contentPadding = buttonContentPadding,
         modifier = Modifier.padding(top = 32.dp)
     ) {
         Text(
             text = text,
-            style = transparent_button_text_style
+            style = transparentButtonTextStyle
         )
     }
 }

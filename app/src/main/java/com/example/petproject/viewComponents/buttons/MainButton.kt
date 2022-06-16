@@ -13,10 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
-import com.example.petproject.consts.uiConsts.mainBlue
-import com.example.petproject.consts.uiConsts.main_button_text_style
-import com.example.petproject.consts.uiConsts.small_shape
-import com.example.petproject.consts.uiConsts.text_white
+import com.example.petproject.consts.uiConsts.*
 
 @Preview
 @Composable
@@ -28,13 +25,13 @@ fun MainButton(
     Button(
         onClick = { },
         modifier = Modifier.padding(top = 8.dp),
-        colors = buttonColors(backgroundColor = mainBlue, contentColor = text_white),
+        colors = buttonColors(backgroundColor = mainBlue, contentColor = textWhite),
         elevation = ButtonDefaults.elevation(
             defaultElevation = 6.dp,
             pressedElevation = 10.dp,
         ),
-        shape = small_shape,
-        contentPadding = PaddingValues.Absolute(left = 32.dp, top = 18.dp, right = 32.dp, bottom = 18.dp)
+        shape = smallShape,
+        contentPadding = buttonContentPadding
     )
     {
         Icon(
@@ -44,7 +41,7 @@ fun MainButton(
         Spacer(Modifier.size(12.dp))
         Text(
             text = text,
-            style = main_button_text_style
+            style = mainButtonTextStyle
         )
     }
 }

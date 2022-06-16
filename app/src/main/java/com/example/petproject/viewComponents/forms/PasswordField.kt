@@ -10,25 +10,28 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
-import com.example.petproject.consts.uiConsts.auth_field_text_style
+import com.example.petproject.consts.uiConsts.authFieldTextStyle
 import com.example.petproject.consts.uiConsts.mainBlue
-import com.example.petproject.consts.uiConsts.neutrals_gray
-import com.example.petproject.consts.uiConsts.validation_black
+import com.example.petproject.consts.uiConsts.neutralsGray
+import com.example.petproject.consts.uiConsts.validationBlack
 
 @Preview
 @Composable
 fun PasswordField (hint: String = "Password") {
     var password by rememberSaveable { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-    val icon = if (passwordVisibility)
-        painterResource(id = R.drawable.visible)
-    else painterResource(id = R.drawable.invisible)
+
+    val iconId = when {
+        passwordVisibility -> R.drawable.visible
+        else -> R.drawable.invisible
+    }
 
     Card(
         modifier = Modifier
@@ -46,8 +49,8 @@ fun PasswordField (hint: String = "Password") {
                     passwordVisibility = !passwordVisibility
                 }) {
                     Icon(
-                        painter = icon,
-                        contentDescription = "Visibility Icon"
+                        painter = painterResource(iconId),
+                        contentDescription = stringResource(R.string.visibility_icon)
                     )
                 }
             },
@@ -59,11 +62,11 @@ fun PasswordField (hint: String = "Password") {
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 trailingIconColor = mainBlue,
-                placeholderColor = neutrals_gray,
-                textColor = validation_black
+                placeholderColor = neutralsGray,
+                textColor = validationBlack
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            textStyle = auth_field_text_style,
+            textStyle = authFieldTextStyle,
             modifier = Modifier.fillMaxWidth()
         )
     }

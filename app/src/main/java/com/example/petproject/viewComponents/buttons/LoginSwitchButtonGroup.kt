@@ -21,8 +21,10 @@ fun LoginSwitchButtonGroup(isChecked: Boolean = true) {
     var firstUnderLine: Dp = 1.dp
     var secondUnderLine: Dp = 1.dp
 
-    if(isChecked) firstUnderLine = 5.dp
-    else secondUnderLine = 5.dp
+    when {
+        isChecked -> firstUnderLine = 5.dp
+        else -> secondUnderLine = 5.dp
+    }
 
     Row(
         modifier = Modifier
@@ -56,13 +58,13 @@ fun LoginSwitchButton(
     TextButton(
         onClick = { },
         modifier = Modifier.fillMaxWidth(),
-        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validation_black),
+        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validationBlack),
         contentPadding = PaddingValues.Absolute(top = 0.dp, bottom = 0.dp)
     ) {
         Text(
             text = text,
             Modifier.padding(vertical = 12.dp),
-            style = login_switch_button_text_style,
+            style = loginSwitchButtonTextStyle,
             textAlign = TextAlign.Center
         )
     }

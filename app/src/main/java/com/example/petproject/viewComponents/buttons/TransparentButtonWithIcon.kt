@@ -22,12 +22,12 @@ fun TransparentButtonWithIcon(
 ) {
     TextButton(
         onClick = { },
-        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validation_black),
-        contentPadding = PaddingValues.Absolute(left = 32.dp, top = 18.dp, right = 32.dp, bottom = 18.dp)
+        colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validationBlack),
+        contentPadding = buttonContentPadding
     ) {
         Text(
             text = text,
-            style = transparent_button_text_style
+            style = transparentButtonTextStyle
         )
         Spacer(Modifier.size(8.dp))
         Icon(
