@@ -12,17 +12,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.petproject.AuthFormType
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
 
-@Preview
+typealias ScreenTypeCallback = (AuthFormType) -> Unit
+
+//@Preview
 @Composable
-fun LoginSwitchButtonGroup(isChecked: Boolean = true) {
+fun LoginSwitchButtonGroup(
+    isLogin: Boolean = true,
+    callback: ScreenTypeCallback
+) {
     var firstUnderLine: Dp = 1.dp
     var secondUnderLine: Dp = 1.dp
 
     when {
-        isChecked -> firstUnderLine = 5.dp
+        isLogin -> firstUnderLine = 5.dp
         else -> secondUnderLine = 5.dp
     }
 
@@ -37,7 +43,7 @@ fun LoginSwitchButtonGroup(isChecked: Boolean = true) {
             contentAlignment = Alignment.BottomCenter
         )
         {
-            LoginSwitchButton(stringResource(R.string.login_switch_btn))
+            LoginSwitchButton(stringResource(R.string.login_switch_btn),AuthFormType.login, callback)
             Divider(color = mainBlue, thickness = firstUnderLine)
         }
         Box(
@@ -45,7 +51,7 @@ fun LoginSwitchButtonGroup(isChecked: Boolean = true) {
             contentAlignment = Alignment.BottomCenter
         )
         {
-            LoginSwitchButton(stringResource(R.string.registry_switch_btn))
+            LoginSwitchButton(stringResource(R.string.registry_switch_btn), AuthFormType.registration, callback)
             Divider(color = mainBlue, thickness = secondUnderLine)
         }
     }
@@ -53,10 +59,12 @@ fun LoginSwitchButtonGroup(isChecked: Boolean = true) {
 
 @Composable
 fun LoginSwitchButton(
-    text: String = "LoginSwitchButton"
+    text: String = "LoginSwitchButton",
+    type: AuthFormType,
+    callback: (AuthFormType) -> Unit
 ) {
     TextButton(
-        onClick = { },
+        onClick = {  callback(type) },
         modifier = Modifier.fillMaxWidth(),
         colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validationBlack),
         contentPadding = PaddingValues.Absolute(top = 0.dp, bottom = 0.dp)

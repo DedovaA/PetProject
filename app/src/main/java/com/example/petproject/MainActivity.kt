@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.petproject.loginScreen.ShowLoginScreen
-import com.example.petproject.loginScreen.ShowRegisterScreen
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.petproject.loginScreen.AuthorizationScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,8 +20,8 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = Color.White
             ) {
-//                    ShowLoginScreen()
-                ShowRegisterScreen()
+                val model = hiltViewModel<AuthViewModel>()
+                AuthorizationScreen(model)
             }
         }
     }

@@ -43,7 +43,8 @@ fun Field(hint: String = "name", inputType: KeyboardType = KeyboardType.Text) {
             ),
             keyboardOptions = KeyboardOptions(keyboardType = inputType),
             textStyle = authFieldTextStyle,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
         )
 
     }

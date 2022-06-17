@@ -67,7 +67,8 @@ fun PasswordField (hint: String = "Password") {
             ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             textStyle = authFieldTextStyle,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
         )
     }
 
