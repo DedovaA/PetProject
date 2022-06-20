@@ -1,5 +1,6 @@
 package com.example.petproject.viewComponents.forms
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,9 +16,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.petproject.consts.uiConsts.authFieldTextStyle
-import com.example.petproject.consts.uiConsts.neutralsGray
-import com.example.petproject.consts.uiConsts.validationBlack
+import com.example.petproject.consts.uiConsts.*
 
 @Preview
 @Composable
@@ -28,7 +27,8 @@ fun Field(hint: String = "name", inputType: KeyboardType = KeyboardType.Text) {
             .fillMaxWidth()
             .padding(bottom = 4.dp),
         shape = RoundedCornerShape(8.dp),
-        elevation = 10.dp
+        elevation = 10.dp,
+//        border = BorderStroke(2.dp, errorTextRed)
     ) {
         TextField(
             value = text,
@@ -46,7 +46,5 @@ fun Field(hint: String = "name", inputType: KeyboardType = KeyboardType.Text) {
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
-
     }
-
 }

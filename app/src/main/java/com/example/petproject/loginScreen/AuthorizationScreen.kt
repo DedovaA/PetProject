@@ -14,7 +14,6 @@ import com.example.petproject.viewComponents.Logo
 import com.example.petproject.viewComponents.buttons.TransparentButtonWithIcon
 import com.example.petproject.viewComponents.buttons.LoginSwitchButtonGroup
 
-//@Preview(showBackground = true)
 @Composable
 fun AuthorizationScreen(viewModel: AuthViewModel) {
     val authForm = viewModel.state.observeAsState(AuthFormType.login)
@@ -46,12 +45,6 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                 AuthFormType.registration -> RegisterScreen()
             }
 
-//            AuthorizationForm()
-//            MainButton(
-//                text = stringResource(R.string.registration),
-//                imageResourceId = R.drawable.paw,
-//                imageDescriptionId = R.string.paw_icon_description
-//            )
         }
         TransparentButtonWithIcon(
             text = stringResource(R.string.login_later),
@@ -61,8 +54,3 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
     }
 }
 
-@Composable
-fun AuthorizationForm(){
-//    RegisterScreen()
-    LoginScreen()
-}
