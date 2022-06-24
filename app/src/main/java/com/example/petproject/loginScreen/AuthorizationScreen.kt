@@ -7,7 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.petproject.AuthFormType
+import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.AuthViewModel
 import com.example.petproject.R
 import com.example.petproject.viewComponents.Logo
@@ -16,7 +16,17 @@ import com.example.petproject.viewComponents.buttons.LoginSwitchButtonGroup
 
 @Composable
 fun AuthorizationScreen(viewModel: AuthViewModel) {
-    val authForm = viewModel.state.observeAsState(AuthFormType.login)
+    val authForm = viewModel.authFormType.observeAsState(AuthFormType.login)
+
+    val name = viewModel.name.observeAsState("")
+    val email = viewModel.email.observeAsState("")
+    val password = viewModel.password.observeAsState("")
+    val passwordConfirm = viewModel.passwordConfirm.observeAsState("")
+
+    val nameValid = viewModel.nameIsValid.observeAsState(true)
+    val emailValid = viewModel.emailIsValid.observeAsState(true)
+    val passwordValid = viewModel.passwordIsValid.observeAsState(true)
+    val passwordConfValid = viewModel.passwordConfirmIsValid.observeAsState(true)
 
     Column(
         modifier = Modifier
@@ -37,12 +47,34 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     AuthFormType.login -> true
                     AuthFormType.registration -> false
                 },
-                viewModel::setAuthScreen
+                viewModel::switchAuthScreen
             )
 
             when(authForm.value){
-                AuthFormType.login -> LoginScreen()
-                AuthFormType.registration -> RegisterScreen()
+                AuthFormType.login -> LoginScreen(
+                    viewModel::setEmail,
+                    viewModel::setPassword,
+                    email.value,
+                    password.value,
+                    emailValid.value,
+                    passwordValid.value,
+                    viewModel::loginValidation
+                )
+                AuthFormType.registration -> RegisterScreen(
+                    viewModel::setName,
+                    viewModel::setEmail,
+                    viewModel::setPassword,
+                    viewModel::setPasswordConfirm,
+                    name.value,
+                    email.value,
+                    password.value,
+                    passwordConfirm.value,
+                    nameValid.value,
+                    emailValid.value,
+                    passwordValid.value,
+                    passwordConfValid.value,
+                    viewModel::registerValidation
+                )
             }
 
         }

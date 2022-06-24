@@ -13,18 +13,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.petproject.AuthFormType
+import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.loginSwitchButtonTextStyle
 import com.example.petproject.consts.uiConsts.mainBlue
 import com.example.petproject.consts.uiConsts.validationBlack
-
-typealias ScreenTypeCallback = (AuthFormType) -> Unit
+import com.example.petproject.loginScreen.AuthTypeCallback
 
 @Composable
 fun LoginSwitchButtonGroup(
     isLogin: Boolean = true,
-    callback: ScreenTypeCallback
+    callback: AuthTypeCallback
 ) {
     var firstUnderLine: Dp = 1.dp
     var secondUnderLine: Dp = 1.dp
@@ -45,7 +44,8 @@ fun LoginSwitchButtonGroup(
             contentAlignment = Alignment.BottomCenter
         )
         {
-            LoginSwitchButton(stringResource(R.string.login_switch_btn),AuthFormType.login, callback)
+            LoginSwitchButton(stringResource(R.string.login_switch_btn),
+                AuthFormType.login, callback)
             Divider(color = mainBlue, thickness = firstUnderLine)
         }
         Box(
@@ -61,12 +61,12 @@ fun LoginSwitchButtonGroup(
 
 @Composable
 fun LoginSwitchButton(
-    text: String = "LoginSwitchButton",
+    text: String,
     type: AuthFormType,
     callback: (AuthFormType) -> Unit
 ) {
     TextButton(
-        onClick = {  callback(type) },
+        onClick = { callback(type) },
         modifier = Modifier.fillMaxWidth(),
         colors = buttonColors(backgroundColor = Color.Transparent, contentColor = validationBlack),
         contentPadding = PaddingValues.Absolute(top = 0.dp, bottom = 0.dp)

@@ -13,26 +13,37 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.petproject.consts.uiConsts.*
+import com.example.petproject.consts.uiConsts.authFieldTextStyle
+import com.example.petproject.consts.uiConsts.errorTextRed
+import com.example.petproject.consts.uiConsts.neutralsGray
+import com.example.petproject.consts.uiConsts.validationBlack
+import com.example.petproject.loginScreen.TextFieldCallback
 
-@Preview
+//@Preview
 @Composable
-fun Field(hint: String = "name", inputType: KeyboardType = KeyboardType.Text) {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
+fun Field(
+    hint: String,
+    inputType: KeyboardType = KeyboardType.Text,
+    textValue: String,
+    callbackField: TextFieldCallback,
+    errorInput: Boolean
+    ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 4.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 10.dp,
-//        border = BorderStroke(2.dp, errorTextRed)
+        border = when {
+            !errorInput -> BorderStroke(2.dp, errorTextRed)
+            else -> BorderStroke(0.dp, Color.Transparent)
+        }
     ) {
         TextField(
-            value = text,
-            onValueChange = { text = it },
+            value = textValue,
+            onValueChange = { callbackField(it) },
             placeholder = { Text(text = hint) },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,

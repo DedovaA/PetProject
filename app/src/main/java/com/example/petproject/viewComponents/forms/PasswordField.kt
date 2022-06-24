@@ -15,15 +15,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
+import com.example.petproject.loginScreen.TextFieldCallback
 
-@Preview
+//@Preview
 @Composable
-fun PasswordField (hint: String = "Password") {
-    var password by rememberSaveable { mutableStateOf("") }
+fun PasswordField (hint: String,
+                   textValue:String,
+                   callbackPassword: TextFieldCallback,
+                   errorInput:Boolean
+) {
+
     var passwordVisibility by remember { mutableStateOf(false) }
 
     val iconId = when {
@@ -37,12 +41,14 @@ fun PasswordField (hint: String = "Password") {
             .padding(bottom = 4.dp),
         shape = RoundedCornerShape(8.dp),
         elevation = 10.dp,
-//        border = BorderStroke(2.dp, errorTextRed)
-
+        border = when {
+            !errorInput -> BorderStroke(2.dp, errorTextRed)
+            else -> BorderStroke(0.dp, Color.Transparent)
+        }
     ) {
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = textValue,
+            onValueChange = { callbackPassword(it) },
             placeholder = { Text(text = hint) },
             trailingIcon = {
                 IconButton(onClick = {
