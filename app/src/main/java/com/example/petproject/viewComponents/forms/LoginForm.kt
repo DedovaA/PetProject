@@ -10,8 +10,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.loginScreen.TextFieldCallback
-import com.example.petproject.utils.emailFormatValidationMessage
-import com.example.petproject.utils.emptyFieldValidationMessage
+import com.example.petproject.utils.EmailFormatValidationMessage
+import com.example.petproject.utils.EmptyFieldValidationMessage
 
 //@Preview
 @Composable
@@ -39,7 +39,7 @@ fun LoginForm(
                 callbackEmail,
                 emailValid
             )
-            emailFormatValidationMessage(emailValid, email)
+            EmailFormatValidationMessage(emailValid, email)
 
             PasswordField(
                 stringResource(R.string.password),
@@ -47,7 +47,7 @@ fun LoginForm(
                 callbackPassword,
                 passwordValid
             )
-            emptyFieldValidationMessage(passwordValid)
+            EmptyFieldValidationMessage(passwordValid)
         }
     }
 }

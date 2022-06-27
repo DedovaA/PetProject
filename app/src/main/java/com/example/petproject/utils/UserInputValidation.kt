@@ -1,6 +1,6 @@
 package com.example.petproject.utils
 
-fun isEmptyField(text: String) = text.isEmpty() || text == "null"
+fun isEmptyField(text: String) = text.isEmpty()
 
 fun isEmailValid(email:String): Boolean{
     val localPart = "^[\\w-.]+"
