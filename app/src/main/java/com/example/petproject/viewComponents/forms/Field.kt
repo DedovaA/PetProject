@@ -29,7 +29,6 @@ fun Field(
     callbackField: TextFieldCallback,
     errorInput: Boolean
     ) {
-
     Card(
         modifier = Modifier
             .fillMaxWidth()

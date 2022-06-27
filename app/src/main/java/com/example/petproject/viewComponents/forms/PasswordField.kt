@@ -22,12 +22,12 @@ import com.example.petproject.loginScreen.TextFieldCallback
 
 //@Preview
 @Composable
-fun PasswordField (hint: String,
-                   textValue:String,
-                   callbackPassword: TextFieldCallback,
-                   errorInput:Boolean
+fun PasswordField (
+    hint: String,
+    textValue:String,
+    callbackPassword: TextFieldCallback,
+    errorInput:Boolean
 ) {
-
     var passwordVisibility by remember { mutableStateOf(false) }
 
     val iconId = when {

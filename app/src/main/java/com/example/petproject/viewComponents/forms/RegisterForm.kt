@@ -10,6 +10,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.loginScreen.TextFieldCallback
+import com.example.petproject.utils.EMPTY_STRING
+import com.example.petproject.utils.emailFormatValidationMessage
+import com.example.petproject.utils.emptyFieldValidationMessage
 
 //@Preview
 @Composable
@@ -36,33 +39,45 @@ fun RegisterForm(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Field(stringResource(R.string.name), KeyboardType.Text, name, callbackName, nameValid)
-            when(nameValid){
-                false -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
+            Field(
+                stringResource(R.string.name),
+                KeyboardType.Text,
+                name,
+                callbackName,
+                nameValid
+            )
+            emptyFieldValidationMessage(nameValid)
 
-            Field(stringResource(R.string.email), KeyboardType.Email, email, callbackEmail, emailValid)
-            when(emailValid){
-                false -> when(email){
-                    "" -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                    else -> ErrorMessage(stringResource(R.string.error_message_email))
+            Field(
+                stringResource(R.string.email),
+                KeyboardType.Email,
+                email,
+                callbackEmail,
+                emailValid
+            )
+            emailFormatValidationMessage(emailValid,email)
+
+            PasswordField(
+                stringResource(R.string.password),
+                password,
+                callbackPassword,
+                passwordValid
+            )
+            emptyFieldValidationMessage(passwordValid)
+
+            PasswordField(
+                stringResource(R.string.repeat_password),
+                passwordConfirm,
+                callbackPasswordConfirm,
+                passwordConfValid
+            )
+                when (passwordConfValid) {
+                    false-> when(passwordConfirm){
+                        EMPTY_STRING -> ErrorMessage(stringResource(R.string.error_message_empty_field))
+                        else -> ErrorMessage(stringResource(R.string.error_message_confirm_password))
+                    }
+                    true -> ErrorMessage(EMPTY_STRING)
                 }
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
-            PasswordField(stringResource(R.string.password),password, callbackPassword, passwordValid)
-            when (passwordValid) {
-                false-> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
-            PasswordField(stringResource(R.string.repeat_password),passwordConfirm, callbackPasswordConfirm, passwordConfValid)
-            when (passwordConfValid) {
-                false-> when(passwordConfirm){
-                    "" -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                    else -> ErrorMessage(stringResource(R.string.error_message_confirm_password))
-                }
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
         }
     }
 }

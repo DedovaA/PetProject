@@ -18,7 +18,14 @@ fun LoginScreen(
     passwordValid: Boolean,
     callbackLoginValid: AuthCheckCallback
 ) {
-    LoginForm(callbackEmail, callbackPassword, email, password, emailValid, passwordValid)
+    LoginForm(
+        callbackEmail,
+        callbackPassword,
+        email,
+        password,
+        emailValid,
+        passwordValid
+    )
     MainButton(
         text = stringResource(R.string.login),
         imageResourceId = R.drawable.paw,

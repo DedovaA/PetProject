@@ -1,10 +1,10 @@
 package com.example.petproject.utils
 
-fun isEmptyField(text: String) = text.isEmpty()
+fun isEmptyField(text: String) = text.isEmpty() || text == "null"
 
 fun isEmailValid(email:String): Boolean{
     val localPart = "^[\\w-.]+"
-    val domainPart = "[\\w-.]{2,}[^.]"
+    val domainPart = "[\\w-.]{2,}[^.]?"
     val rootDomain = "\\.[\\w-]{2,}"
     val validEmailRegex = "$localPart@$domainPart$rootDomain"
 
@@ -16,4 +16,3 @@ fun isEmailValid(email:String): Boolean{
 }
 
 fun isPasswordMatch(password: String, passConfirm: String) = password == passConfirm
-

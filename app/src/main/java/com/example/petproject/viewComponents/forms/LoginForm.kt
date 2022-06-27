@@ -1,6 +1,5 @@
 package com.example.petproject.viewComponents.forms
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,15 +10,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.loginScreen.TextFieldCallback
+import com.example.petproject.utils.emailFormatValidationMessage
+import com.example.petproject.utils.emptyFieldValidationMessage
 
 //@Preview
 @Composable
-fun LoginForm(callbackEmail: TextFieldCallback,
-              callbackPassword: TextFieldCallback,
-              email:String,
-              password:String,
-              emailValid: Boolean,
-              passwordValid: Boolean
+fun LoginForm(
+    callbackEmail: TextFieldCallback,
+    callbackPassword: TextFieldCallback,
+    email:String,
+    password:String,
+    emailValid: Boolean,
+    passwordValid: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -30,20 +32,22 @@ fun LoginForm(callbackEmail: TextFieldCallback,
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Field(stringResource(R.string.email), KeyboardType.Email, email, callbackEmail, emailValid)
-            when(emailValid){
-                false -> when(email){
-                    "" -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                    else -> ErrorMessage(stringResource(R.string.error_message_email))
-                }
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
+            Field(
+                stringResource(R.string.email),
+                KeyboardType.Email,
+                email,
+                callbackEmail,
+                emailValid
+            )
+            emailFormatValidationMessage(emailValid, email)
 
-            PasswordField(stringResource(R.string.password), password, callbackPassword, passwordValid)
-            when (passwordValid) {
-                false-> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                else -> ErrorMessage(stringResource(R.string.empty_string))
-            }
+            PasswordField(
+                stringResource(R.string.password),
+                password,
+                callbackPassword,
+                passwordValid
+            )
+            emptyFieldValidationMessage(passwordValid)
         }
     }
 }
