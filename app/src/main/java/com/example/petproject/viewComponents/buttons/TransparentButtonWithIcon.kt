@@ -13,10 +13,10 @@ import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
 
-@Preview
+//@Preview
 @Composable
 fun TransparentButtonWithIcon(
-    text: String = "LaterButton",
+    text: String,
     imageResourceId: Int = R.drawable.arrow_back_ios,
     imageDescriptionId: Int = R.string.arrow_icon_description
 ) {

@@ -1,4 +1,4 @@
-package com.example.petproject
+package com.example.petproject.statesEnum
 
 enum class AuthFormType {
     login,

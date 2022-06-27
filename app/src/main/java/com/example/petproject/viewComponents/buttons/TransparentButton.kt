@@ -10,10 +10,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.petproject.consts.uiConsts.*
 
-@Preview
+//@Preview
 @Composable
 fun TransparentButton(
-    text: String = "TransparentButton"
+    text: String
 ) {
     TextButton(
         onClick = { },
