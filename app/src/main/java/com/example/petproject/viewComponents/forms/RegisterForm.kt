@@ -9,22 +9,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
-import com.example.petproject.loginScreen.TextFieldCallback
+import com.example.petproject.utils.TextFieldCallback
 import com.example.petproject.utils.EMPTY_STRING
 import com.example.petproject.utils.EmailFormatValidationMessage
 import com.example.petproject.utils.EmptyFieldValidationMessage
 
-//@Preview
+// @Preview
 @Composable
 fun RegisterForm(
     callbackName: TextFieldCallback,
     callbackEmail: TextFieldCallback,
     callbackPassword: TextFieldCallback,
     callbackPasswordConfirm: TextFieldCallback,
-    name:String,
-    email:String,
-    password:String,
-    passwordConfirm:String,
+    name: String,
+    email: String,
+    password: String,
+    passwordConfirm: String,
     nameValid: Boolean,
     emailValid: Boolean,
     passwordValid: Boolean,
@@ -34,52 +34,49 @@ fun RegisterForm(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 40.dp, bottom = 8.dp)
-    )
-    {
+    ) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
             Field(
-                stringResource(R.string.name),
-                KeyboardType.Text,
-                name,
-                callbackName,
-                nameValid
+                hint = stringResource(R.string.name),
+                inputType = KeyboardType.Text,
+                textValue = name,
+                callbackField = callbackName,
+                errorInput = nameValid
             )
-            EmptyFieldValidationMessage(nameValid)
+            EmptyFieldValidationMessage(isFieldValid = nameValid)
 
             Field(
-                stringResource(R.string.email),
-                KeyboardType.Email,
-                email,
-                callbackEmail,
-                emailValid
+                hint = stringResource(R.string.email),
+                inputType = KeyboardType.Email,
+                textValue = email,
+                callbackField = callbackEmail,
+                errorInput = emailValid
             )
-            EmailFormatValidationMessage(emailValid,email)
+            EmailFormatValidationMessage(isEmailValid = emailValid, email = email)
 
             PasswordField(
-                stringResource(R.string.password),
-                password,
-                callbackPassword,
-                passwordValid
+                hint = stringResource(R.string.password),
+                textValue = password,
+                callbackPassword = callbackPassword,
+                errorInput = passwordValid
             )
-            EmptyFieldValidationMessage(passwordValid)
+            EmptyFieldValidationMessage(isFieldValid = passwordValid)
 
             PasswordField(
-                stringResource(R.string.repeat_password),
-                passwordConfirm,
-                callbackPasswordConfirm,
-                passwordConfValid
+                hint = stringResource(R.string.repeat_password),
+                textValue = passwordConfirm,
+                callbackPassword = callbackPasswordConfirm,
+                errorInput = passwordConfValid
             )
-                when (passwordConfValid) {
-                    false-> when(passwordConfirm){
-                        EMPTY_STRING -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-                        else -> ErrorMessage(stringResource(R.string.error_message_confirm_password))
-                    }
-                    true -> ErrorMessage(EMPTY_STRING)
+            when (passwordConfValid) {
+                false -> when (passwordConfirm) {
+                    EMPTY_STRING -> ErrorMessage(message = stringResource(R.string.error_message_empty_field))
+                    else -> ErrorMessage(message = stringResource(R.string.error_message_confirm_password))
                 }
+                true -> ErrorMessage(message = EMPTY_STRING)
+            }
         }
     }
 }
-
-

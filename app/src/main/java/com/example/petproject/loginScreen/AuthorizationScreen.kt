@@ -7,12 +7,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.AuthViewModel
 import com.example.petproject.R
+import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.viewComponents.Logo
-import com.example.petproject.viewComponents.buttons.TransparentButtonWithIcon
 import com.example.petproject.viewComponents.buttons.LoginSwitchButtonGroup
+import com.example.petproject.viewComponents.buttons.TransparentButtonWithIcon
 
 @Composable
 fun AuthorizationScreen(viewModel: AuthViewModel) {
@@ -39,44 +39,44 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
-        )
-        {
+        ) {
             Logo()
             LoginSwitchButtonGroup(
-                when(authForm.value){
+                isLogin = when (authForm.value) {
                     AuthFormType.login -> true
                     AuthFormType.registration -> false
                 },
-                viewModel::switchAuthScreen
+                callback = viewModel::switchAuthScreen
             )
 
-            when(authForm.value){
+            when (authForm.value) {
                 AuthFormType.login -> LoginScreen(
-                    viewModel::setEmail,
-                    viewModel::setPassword,
-                    email.value,
-                    password.value,
-                    emailValid.value,
-                    passwordValid.value,
-                    viewModel::loginValidation
+                    callbackEmail = viewModel::setEmail,
+                    callbackPassword = viewModel::setPassword,
+                    email = email.value,
+                    password = password.value,
+                    emailValid = emailValid.value,
+                    passwordValid = passwordValid.value,
+                    callbackLoginValid = viewModel::loginValidation,
+                    callbackLoginAttempt = viewModel::loginAttempt
                 )
                 AuthFormType.registration -> RegisterScreen(
-                    viewModel::setName,
-                    viewModel::setEmail,
-                    viewModel::setPassword,
-                    viewModel::setPasswordConfirm,
-                    name.value,
-                    email.value,
-                    password.value,
-                    passwordConfirm.value,
-                    nameValid.value,
-                    emailValid.value,
-                    passwordValid.value,
-                    passwordConfValid.value,
-                    viewModel::registerValidation
+                    callbackName = viewModel::setName,
+                    callbackEmail = viewModel::setEmail,
+                    callbackPassword = viewModel::setPassword,
+                    callbackPasswordConfirm = viewModel::setPasswordConfirm,
+                    name = name.value,
+                    email = email.value,
+                    password = password.value,
+                    passwordConfirm = passwordConfirm.value,
+                    nameValid = nameValid.value,
+                    emailValid = emailValid.value,
+                    passwordValid = passwordValid.value,
+                    passwordConfValid = passwordConfValid.value,
+                    callbackRegisterValid = viewModel::registerValidation,
+                    callbackLoginAttempt = viewModel::loginAttempt
                 )
             }
-
         }
         TransparentButtonWithIcon(
             text = stringResource(R.string.login_later),
@@ -85,4 +85,3 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
         )
     }
 }
-
