@@ -16,7 +16,8 @@ fun LoginScreen(
     password:String,
     emailValid: Boolean,
     passwordValid: Boolean,
-    callbackLoginValid: AuthCheckCallback
+    callbackLoginValid: AuthCheckCallback,
+    callbackHealthcheck: () -> Unit
 ) {
     LoginForm(
         callbackEmail,
@@ -30,7 +31,8 @@ fun LoginScreen(
         text = stringResource(R.string.login),
         imageResourceId = R.drawable.paw,
         imageDescriptionId = R.string.paw_icon_description,
-        callbackLoginValid
+        callbackLoginValid,
+        callbackHealthcheck
     )
     TransparentButton(
         text = stringResource(R.string.forgot_password)

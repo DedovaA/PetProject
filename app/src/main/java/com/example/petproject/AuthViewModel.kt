@@ -3,6 +3,7 @@ package com.example.petproject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.petproject.network.Network
 import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.utils.isEmailValid
 import com.example.petproject.utils.isEmptyField
@@ -11,7 +12,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor() : ViewModel(){
+class AuthViewModel @Inject constructor(
+    private val network: Network
+) : ViewModel(){
 
     /**
      * authScreenType (login / registration)
@@ -140,5 +143,12 @@ class AuthViewModel @Inject constructor() : ViewModel(){
             else -> true
         }
         setPasswordConfirmValid(passwordConfirmState)
+    }
+
+    /**
+     * healthcheck-запрос к API по нажатию кнопки "Войти/Зарегистрироваться"
+     */
+    fun healthcheckAttempt(){
+        network.healthcheckRequest()
     }
 }

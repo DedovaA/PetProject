@@ -21,11 +21,13 @@ fun MainButton(
     text: String,
     imageResourceId: Int = R.drawable.paw,
     imageDescriptionId: Int = R.string.paw_icon_description,
-    callbackLoginValid: AuthCheckCallback
+    callbackLoginValid: AuthCheckCallback,
+    callbackHealthcheck: () -> Unit
 ) {
     Button(
         onClick = {
             callbackLoginValid()
+            callbackHealthcheck()
         },
         modifier = Modifier.padding(top = 8.dp),
         colors = buttonColors(backgroundColor = mainBlue, contentColor = textWhite),
