@@ -9,12 +9,15 @@ import com.example.petproject.utils.isEmailValid
 import com.example.petproject.utils.isEmptyField
 import com.example.petproject.utils.isPasswordMatch
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val network: Network
 ) : ViewModel(){
+
+    private val compositeDisposable = CompositeDisposable()
 
     /**
      * authScreenType (login / registration)
@@ -148,7 +151,14 @@ class AuthViewModel @Inject constructor(
     /**
      * healthcheck-запрос к API по нажатию кнопки "Войти/Зарегистрироваться"
      */
-    fun healthcheckAttempt(){
-        network.healthcheckRequest()
+
+    fun healthcheckAttempt() {
+        val disposable = network.healthcheckRequest()
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 }
