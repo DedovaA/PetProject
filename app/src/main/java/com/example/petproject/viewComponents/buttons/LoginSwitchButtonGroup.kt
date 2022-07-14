@@ -13,12 +13,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.loginSwitchButtonTextStyle
 import com.example.petproject.consts.uiConsts.mainBlue
 import com.example.petproject.consts.uiConsts.validationBlack
-import com.example.petproject.loginScreen.AuthTypeCallback
+import com.example.petproject.utils.AuthTypeCallback
+import com.example.petproject.statesEnum.AuthFormType
 
 @Composable
 fun LoginSwitchButtonGroup(
@@ -37,23 +37,27 @@ fun LoginSwitchButtonGroup(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 32.dp)
-    )
-    {
+    ) {
         Box(
-            Modifier.weight(1.0f),
+            modifier = Modifier.weight(1.0f),
             contentAlignment = Alignment.BottomCenter
-        )
-        {
-            LoginSwitchButton(stringResource(R.string.login_switch_btn),
-                AuthFormType.login, callback)
+        ) {
+            LoginSwitchButton(
+                text = stringResource(R.string.login_switch_btn),
+                type = AuthFormType.login,
+                callback = callback
+            )
             Divider(color = mainBlue, thickness = firstUnderLine)
         }
         Box(
             Modifier.weight(1.0f),
             contentAlignment = Alignment.BottomCenter
-        )
-        {
-            LoginSwitchButton(stringResource(R.string.registry_switch_btn), AuthFormType.registration, callback)
+        ) {
+            LoginSwitchButton(
+                text = stringResource(R.string.registry_switch_btn),
+                type = AuthFormType.registration,
+                callback = callback
+            )
             Divider(color = mainBlue, thickness = secondUnderLine)
         }
     }
@@ -73,7 +77,7 @@ fun LoginSwitchButton(
     ) {
         Text(
             text = text,
-            Modifier.padding(vertical = 12.dp),
+            modifier = Modifier.padding(vertical = 12.dp),
             style = loginSwitchButtonTextStyle,
             textAlign = TextAlign.Center
         )

@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -18,15 +17,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
-import com.example.petproject.loginScreen.TextFieldCallback
+import com.example.petproject.utils.TextFieldCallback
 
-//@Preview
 @Composable
-fun PasswordField (
+fun PasswordField(
     hint: String,
-    textValue:String,
+    textValue: String,
     callbackPassword: TextFieldCallback,
-    errorInput:Boolean
+    errorInput: Boolean
 ) {
     var passwordVisibility by remember { mutableStateOf(false) }
 
@@ -77,7 +75,4 @@ fun PasswordField (
             singleLine = true
         )
     }
-
 }
-
-

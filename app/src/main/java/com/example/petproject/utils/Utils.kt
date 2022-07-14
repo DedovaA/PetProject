@@ -10,21 +10,20 @@ import com.example.petproject.viewComponents.forms.ErrorMessage
  */
 
 @Composable
-fun EmptyFieldValidationMessage(isFieldValid:Boolean){
-    when(isFieldValid){
-        false -> ErrorMessage(stringResource(R.string.error_message_empty_field))
+fun EmptyFieldValidationMessage(isFieldValid: Boolean) {
+    when (isFieldValid) {
+        false -> ErrorMessage(message = stringResource(R.string.error_message_empty_field))
         true -> ErrorMessage(EMPTY_STRING)
     }
 }
 
 @Composable
-fun EmailFormatValidationMessage(isEmailValid:Boolean, email:String){
-    when(isEmailValid){
-        false -> when(email){
-            EMPTY_STRING -> ErrorMessage(stringResource(R.string.error_message_empty_field))
-            else -> ErrorMessage(stringResource(R.string.error_message_email))
+fun EmailFormatValidationMessage(isEmailValid: Boolean, email: String) {
+    when (isEmailValid) {
+        false -> when (email) {
+            EMPTY_STRING -> ErrorMessage(message = stringResource(R.string.error_message_empty_field))
+            else -> ErrorMessage(message = stringResource(R.string.error_message_email))
         }
-        true -> ErrorMessage(EMPTY_STRING)
-}
-
+        true -> ErrorMessage(message = EMPTY_STRING)
+    }
 }

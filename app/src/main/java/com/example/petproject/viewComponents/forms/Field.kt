@@ -9,7 +9,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,9 +18,8 @@ import com.example.petproject.consts.uiConsts.authFieldTextStyle
 import com.example.petproject.consts.uiConsts.errorTextRed
 import com.example.petproject.consts.uiConsts.neutralsGray
 import com.example.petproject.consts.uiConsts.validationBlack
-import com.example.petproject.loginScreen.TextFieldCallback
+import com.example.petproject.utils.TextFieldCallback
 
-//@Preview
 @Composable
 fun Field(
     hint: String,
@@ -28,7 +27,7 @@ fun Field(
     textValue: String,
     callbackField: TextFieldCallback,
     errorInput: Boolean
-    ) {
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

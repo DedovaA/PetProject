@@ -21,17 +21,8 @@ class MainActivity : ComponentActivity() {
                 color = Color.White
             ) {
                 val model = hiltViewModel<AuthViewModel>()
-                AuthorizationScreen(model)
+                AuthorizationScreen(viewModel = model)
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
