@@ -1,10 +1,9 @@
 package com.example.petproject.network
 
-import android.util.Log
-import androidx.compose.ui.input.key.Key.Companion.D
-import com.google.gson.GsonBuilder
 import com.example.petproject.repo.LoginData
 import com.example.petproject.repo.LoginToken
+import com.example.petproject.repo.RegisterData
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,12 +11,12 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiFactory : NetworkLayer{
+class ApiFactory : NetworkLayer {
 
     private val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
 
     private val client = OkHttpClient.Builder()
-        .callTimeout(5, TimeUnit.SECONDS)
+        .callTimeout(timeout = 5, TimeUnit.SECONDS)
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -38,10 +37,10 @@ class ApiFactory : NetworkLayer{
         val responseHealthCheck = apiService.healthCheck()
         when (responseHealthCheck.code()) {
             200 -> {
-                println("OK")
+                println("*** OK ***")
             }
             else -> {
-                println("ErrorCode : ${responseHealthCheck.code()}")
+                println("******* ErrorCode : ${responseHealthCheck.code()}")
             }
         }
     }
@@ -50,11 +49,37 @@ class ApiFactory : NetworkLayer{
         val responseLogin = apiService.login(loginData)
         return when (responseLogin.code()) {
             200 -> {
-                println("OK")
+                println("*** WELLCOME ***")
                 responseLogin.body()
             }
             else -> {
-                println("ErrorCode : ${responseLogin.code()}")
+                val errorMessage = when {
+                    responseLogin.code() == 404 -> "User with this creds not found."
+                    responseLogin.code() == 415 -> "Unsupported Media Type, or empty body."
+                    responseLogin.code() == 422 -> "Wrong JSON format."
+                    else -> "Some internal error."
+                }
+                println("******* LOGIN ERROR : $errorMessage")
+                null
+            }
+        }
+    }
+
+    override suspend fun registerRequest(registerData: RegisterData): LoginToken? {
+        val responseRegister = apiService.register(registerData)
+        return when (responseRegister.code()) {
+            200 -> {
+                println("*** WELLCOME ***")
+                responseRegister.body()
+            }
+            else -> {
+                val errorMessage = when {
+                    responseRegister.code() == 409 -> "User with this creds already exists."
+                    responseRegister.code() == 415 -> "Unsupported Media Type, or empty body."
+                    responseRegister.code() == 422 -> "Wrong JSON format."
+                    else -> "Some internal error."
+                }
+                println("******* REGISTER ERROR : $errorMessage")
                 null
             }
         }

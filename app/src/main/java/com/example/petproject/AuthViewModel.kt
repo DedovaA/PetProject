@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.petproject.network.NetworkLayer
 import com.example.petproject.repo.LoginData
+import com.example.petproject.repo.PrefService
+import com.example.petproject.repo.RegisterData
 import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.utils.EMPTY_STRING
 import com.example.petproject.utils.isEmailValid
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val network: NetworkLayer
+    private val network: NetworkLayer,
+    private val preferences: PrefService
 ) : ViewModel() {
 
     /**
@@ -160,6 +163,31 @@ class AuthViewModel @Inject constructor(
     fun loginAttempt() {
         viewModelScope.launch {
             network.healthCheckRequest()
+        }
+    }
+
+    fun login() {
+        viewModelScope.launch {
+            val tokens = network.loginRequest(
+                LoginData(email = _email.value!!, password = _password.value!!)
+            )
+            if (tokens != null) {
+                preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
+            }
+        }
+    }
+
+    fun register() {
+        viewModelScope.launch {
+            val tokens = network.registerRequest(
+                RegisterData(
+                    email = _email.value!!,
+                    password = _password.value!!,
+                    userName = _name.value!!,
+                )
+            )
+            if (tokens != null)
+                preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
         }
     }
 }
