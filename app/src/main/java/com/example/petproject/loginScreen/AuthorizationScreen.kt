@@ -58,7 +58,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
                     callbackLoginValid = viewModel::loginValidation,
-                    callbackLoginAttempt = viewModel::loginAttempt
+                    callbackLoginAttempt = viewModel::login
                 )
                 AuthFormType.registration -> RegisterScreen(
                     callbackName = viewModel::setName,
@@ -74,7 +74,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     passwordValid = passwordValid.value,
                     passwordConfValid = passwordConfValid.value,
                     callbackRegisterValid = viewModel::registerValidation,
-                    callbackLoginAttempt = viewModel::loginAttempt
+                    callbackLoginAttempt = viewModel::register
                 )
             }
         }
