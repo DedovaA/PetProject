@@ -22,8 +22,8 @@ class MainActivity : ComponentActivity() {
                 color = Color.White
             ) {
                 val model = hiltViewModel<AuthViewModel>()
-                AuthorizationScreen(viewModel = model)
-//                AdListScreen(viewModel = model)
+//                AuthorizationScreen(viewModel = model)
+                AdListScreen(viewModel = model)
             }
         }
     }

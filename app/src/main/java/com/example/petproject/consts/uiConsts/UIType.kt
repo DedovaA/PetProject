@@ -41,3 +41,8 @@ val adLocationTextStyle = TextStyle(
     fontSize = 12.sp,
     color = neutralsGray
 )
+val petTypeButtonTextStyle = TextStyle(
+    fontFamily = FontFamily(Font(R.font.mulish_semi_bold)),
+    fontSize = 16.sp,
+    color = textWhite
+)
