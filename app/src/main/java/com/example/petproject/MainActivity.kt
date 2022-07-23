@@ -8,6 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.petproject.announcementScreen.AdListScreen
 import com.example.petproject.loginScreen.AuthorizationScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 val model = hiltViewModel<AuthViewModel>()
                 AuthorizationScreen(viewModel = model)
+//                AdListScreen(viewModel = model)
             }
         }
     }

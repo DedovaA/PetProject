@@ -1,5 +1,6 @@
 package com.example.petproject.network
 
+import com.example.petproject.repo.AnnouncementList
 import com.example.petproject.repo.LoginData
 import com.example.petproject.repo.LoginToken
 import com.example.petproject.repo.RegisterData
@@ -69,7 +70,7 @@ class ApiFactory : NetworkLayer {
         val responseRegister = apiService.register(registerData)
         return when (responseRegister.code()) {
             200 -> {
-                println("*** WELLCOME ***")
+                println("******* WELLCOME *******")
                 responseRegister.body()
             }
             else -> {
@@ -80,6 +81,26 @@ class ApiFactory : NetworkLayer {
                     else -> "Some internal error."
                 }
                 println("******* REGISTER ERROR : $errorMessage")
+                null
+            }
+        }
+    }
+
+    override suspend fun getAnnouncementsRequest(petType: String): AnnouncementList? {
+        val responseAnnouncementList = apiService.getAnnouncements(petType)
+        return when (responseAnnouncementList.code()){
+            200 -> {
+                println("******* ADLIST DOWNLOADED ********")
+                responseAnnouncementList.body()
+            }
+            else -> {
+                val errorMessage = when {
+                    responseAnnouncementList.code() == 415 -> "Unsupported Media Type, or empty body."
+                    responseAnnouncementList.code() == 422 -> "Wrong parameter."
+                    responseAnnouncementList.code() == 426 -> "Token outdated."
+                    else -> "Some internal error."
+                }
+                println("******* ERROR ADLIST DOWNLOAD : $errorMessage")
                 null
             }
         }

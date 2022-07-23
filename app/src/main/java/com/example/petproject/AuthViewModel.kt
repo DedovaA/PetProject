@@ -5,10 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.petproject.network.NetworkLayer
+import com.example.petproject.repo.AnnouncementList
 import com.example.petproject.repo.LoginData
 import com.example.petproject.repo.PrefService
 import com.example.petproject.repo.RegisterData
 import com.example.petproject.statesEnum.AuthFormType
+import com.example.petproject.statesEnum.PetType
 import com.example.petproject.utils.EMPTY_STRING
 import com.example.petproject.utils.isEmailValid
 import com.example.petproject.utils.isEmptyField
@@ -22,6 +24,33 @@ class AuthViewModel @Inject constructor(
     private val network: NetworkLayer,
     private val preferences: PrefService
 ) : ViewModel() {
+
+    /**
+     * Announcement List для отображения
+     */
+    private val _visibleAdList = MutableLiveData<AnnouncementList?>()
+    val visibleAdList: LiveData<AnnouncementList?> = _visibleAdList
+    private fun setAdList(list: AnnouncementList?) {
+        _visibleAdList.postValue(list)
+    }
+
+    /**
+     * petType to APIRequest
+     */
+    private val _petType = MutableLiveData<String>()
+    val petType: LiveData<String> = _petType
+    private fun setPetType(type: String) {
+        _petType.postValue(type)
+    }
+
+    /**
+     * petType switcher
+     */
+    private val _petTypeSwitcher = MutableLiveData<PetType>()
+    val petTypeSwitcher: LiveData<PetType> = _petTypeSwitcher
+    private fun setPetType(type: PetType) {
+        _petTypeSwitcher.postValue(type)
+    }
 
     /**
      * authScreenType (login / registration)
@@ -190,4 +219,13 @@ class AuthViewModel @Inject constructor(
                 preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
         }
     }
+
+    fun getAdList(){
+        viewModelScope.launch {
+            val adList = network.getAnnouncementsRequest(_petType.value?:"dog") //TODO change to "all"
+            setAdList(adList)
+        }
+    }
+
+
 }
