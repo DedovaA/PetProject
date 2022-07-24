@@ -4,19 +4,22 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -25,105 +28,139 @@ import coil.compose.AsyncImage
 import com.example.petproject.AuthViewModel
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
-import com.example.petproject.repo.AnnouncementList
 import com.example.petproject.repo.DataAnnouncement
-import com.example.petproject.repo.GeoPosition
-import com.example.petproject.statesEnum.AuthFormType
-import com.example.petproject.statesEnum.PetType
-import com.example.petproject.ui.theme.Shapes
-import com.example.petproject.viewComponents.buttons.LoginSwitchButton
+import com.example.petproject.utils.EMPTY_STRING
 
-@OptIn(ExperimentalFoundationApi::class)
-@Preview
 @Composable
-fun AdListScreen(
-    viewModel: AuthViewModel
-) {
-    val adList = viewModel.visibleAdList.observeAsState(
-        listOf(
-            DataAnnouncement(
-                id = 1,
-                petType = "dog",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            ),
-            DataAnnouncement(
-                id = 2,
-                petType = "dog2",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo2",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            ),
-            DataAnnouncement(
-                id = 3,
-                petType = "dog3",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo3",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            ),
-            DataAnnouncement(
-                id = 4,
-                petType = "dog4",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo4",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            ),
-            DataAnnouncement(
-                id = 3,
-                petType = "dog3",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo3",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            ),
-            DataAnnouncement(
-                id = 4,
-                petType = "dog4",
-                imageUrl = "https://i.pinimg.com/736x/c7/03/3e/c7033e28b42d5a4848e818379043944a.jpg",
-                title = "Fat Doggo4",
-                description = "needs nothing",
-                geoPosition = GeoPosition(73.37, 54.5)
-            )
-        )
-    )
+fun AdListScreen(viewModel: AuthViewModel) {
+    val petType = viewModel.petType.observeAsState(EMPTY_STRING)
+    val adList = viewModel.visibleAdList.observeAsState(listOf())
 
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        PetTypeSwitchButtonGroup()
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(
-                8.dp,
-                alignment = Alignment.CenterHorizontally
-            ),
-            content = {
-                items((adList.value as List<DataAnnouncement>).size){
-                        i -> PetCard((adList.value as List<DataAnnouncement>)[i])
-                }
-            }
+        viewModel.getAdList(petType.value)
+
+        PetTypeSwitchButtonGroup(
+            petType = petType.value,
+            callbackPetType = viewModel::switchPetTypeButton,
+        )
+        AdList(
+            adList = adList.value!! //TODO перенаправить на пустой экран
         )
     }
+}
 
+@OptIn(ExperimentalFoundationApi::class)
+@Preview
+@Composable
+fun AdList(
+    adList: List<DataAnnouncement>
+){
+    LazyVerticalGrid(
+        cells = GridCells.Fixed(2),
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+        content = {
+            items(adList){ item ->
+                PetCard(item)
+            }
+        }
+    )
+}
 
-//    LazyColumn(
-//        modifier = Modifier.fillMaxSize(),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ){
-//        itemsIndexed(
-//            adList.value as List<DataAnnouncement>
-//        ){
-//            _, item -> PetCard(dataAnnouncement = item)
-//        }
-//    }
+@Preview
+@Composable
+fun PetTypeButton(
+    text: String,
+    type: String,
+    callbackPetType: (String) -> Unit
+) {
+    TextButton(
+        onClick = {
+            callbackPetType(type)
+        },
+        modifier = Modifier
+                    .fillMaxWidth()
+                    .background(mainBlue),
+        shape = RectangleShape
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(vertical = 16.dp),
+            style = petTypeButtonTextStyle,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PetTypeSwitchButtonGroup(
+    petType: String,
+    callbackPetType: (String) -> Unit
+) {
+    var allUnderlined: Dp = 1.dp
+    var dogsUnderlined: Dp = 1.dp
+    var catsUnderlined: Dp = 1.dp
+    var otherUnderlined: Dp = 1.dp
+
+    when (petType){
+        "dog" -> dogsUnderlined = 5.dp
+        "cat" -> catsUnderlined = 5.dp
+        "other" -> otherUnderlined = 5.dp
+        else -> allUnderlined = 5.dp
+    }
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier.weight(1.0f),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            PetTypeButton(
+                text = "Все",
+                type = EMPTY_STRING,
+                callbackPetType = callbackPetType
+            )
+            Divider(color = textWhite, thickness = allUnderlined)
+        }
+        Box(
+            modifier = Modifier.weight(1.0f),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            PetTypeButton(
+                text = "Собаки",
+                type = "dog",
+                callbackPetType = callbackPetType
+            )
+            Divider(color = textWhite, thickness = dogsUnderlined)
+        }
+        Box(
+            modifier = Modifier.weight(1.0f),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            PetTypeButton(
+                text = "Кошки",
+                type = "cat",
+                callbackPetType = callbackPetType
+            )
+            Divider(color = textWhite, thickness = catsUnderlined)
+        }
+        Box(
+            modifier = Modifier.weight(1.0f),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            PetTypeButton(
+                text = "Другие",
+                type = "other",
+                callbackPetType = callbackPetType
+            )
+            Divider(color = textWhite, thickness = otherUnderlined)
+        }
+    }
 }
 
 @Preview
@@ -152,7 +189,6 @@ fun PetCard(dataAnnouncement: DataAnnouncement){
         }
     }
 }
-
 
 @Preview
 @Composable
@@ -192,7 +228,6 @@ fun AdDescription(desc: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 4.dp),
-//        textAlign = TextAlign.Start,
         style = adDescriptionTextStyle,
         maxLines = 2
     )
@@ -223,7 +258,7 @@ fun AdLocation(locAddress: String) {
         }
     }
 }
-
+/**
 @Preview
 @Composable
 fun NoAdsScreen() {
@@ -233,95 +268,4 @@ fun NoAdsScreen() {
         style = authFieldTextStyle
     )
 }
-
-@Preview
-@Composable
-fun PetTypeButton(
-    text: String,
-    type: PetType,
-//    callback: (PetType) -> Unit
-) {
-    TextButton(
-        onClick = {  },
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(mainBlue),
-        shape = RectangleShape
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(vertical = 16.dp),
-            style = petTypeButtonTextStyle,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Preview
-@Composable
-fun PetTypeSwitchButtonGroup(
-    petType: PetType = PetType.all,
-//    callback: (PetType) -> Unit
-) {
-    var allUnderlined: Dp = 1.dp
-    var dogsUnderlined: Dp = 1.dp
-    var catsUnderlined: Dp = 1.dp
-    var otherUnderlined: Dp = 1.dp
-
-    when (petType){
-        PetType.dogs -> dogsUnderlined = 5.dp
-        PetType.cats -> catsUnderlined = 5.dp
-        PetType.other -> otherUnderlined = 5.dp
-        else -> allUnderlined = 5.dp
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        Box(
-            modifier = Modifier.weight(1.0f),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            PetTypeButton(
-                text = "Все",
-                type = PetType.all,
-//                callback = callback
-            )
-            Divider(color = textWhite, thickness = allUnderlined)
-        }
-        Box(
-            Modifier.weight(1.0f),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            PetTypeButton(
-                text = "Собаки",
-                type = PetType.dogs,
-//                callback = callback
-            )
-            Divider(color = textWhite, thickness = dogsUnderlined)
-        }
-        Box(
-            Modifier.weight(1.0f),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            PetTypeButton(
-                text = "Кошки",
-                type = PetType.cats,
-//                callback = callback
-            )
-            Divider(color = textWhite, thickness = catsUnderlined)
-        }
-        Box(
-            Modifier.weight(1.0f),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            PetTypeButton(
-                text = "Другие",
-                type = PetType.other,
-//                callback = callback
-            )
-            Divider(color = textWhite, thickness = otherUnderlined)
-        }
-    }
-}
+ */

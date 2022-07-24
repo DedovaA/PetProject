@@ -6,14 +6,11 @@ data class DataAnnouncement(
     val imageUrl: String,
     val title: String,
     val description: String,
-    val geoPosition: GeoPosition
+//    val geoPosition: GeoPosition
+    val created: String
 )
 
 data class GeoPosition(
     val lat: Double,
     val lng: Double
-)
-
-data class AnnouncementList(
-    val announcementList: List<DataAnnouncement>
 )

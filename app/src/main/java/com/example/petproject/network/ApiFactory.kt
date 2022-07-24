@@ -1,9 +1,6 @@
 package com.example.petproject.network
 
-import com.example.petproject.repo.AnnouncementList
-import com.example.petproject.repo.LoginData
-import com.example.petproject.repo.LoginToken
-import com.example.petproject.repo.RegisterData
+import com.example.petproject.repo.*
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -86,7 +83,7 @@ class ApiFactory : NetworkLayer {
         }
     }
 
-    override suspend fun getAnnouncementsRequest(petType: String): AnnouncementList? {
+    override suspend fun getAnnouncementsRequest(petType: String): List<DataAnnouncement>? {
         val responseAnnouncementList = apiService.getAnnouncements(petType)
         return when (responseAnnouncementList.code()){
             200 -> {
@@ -105,6 +102,4 @@ class ApiFactory : NetworkLayer {
             }
         }
     }
-
-
 }
