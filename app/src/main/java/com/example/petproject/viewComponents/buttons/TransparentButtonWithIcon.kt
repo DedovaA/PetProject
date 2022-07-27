@@ -21,10 +21,11 @@ import com.example.petproject.consts.uiConsts.validationBlack
 fun TransparentButtonWithIcon(
     text: String,
     imageResourceId: Int = R.drawable.arrow_back_ios,
-    imageDescriptionId: Int = R.string.arrow_icon_description
+    imageDescriptionId: Int = R.string.arrow_icon_description,
+    callbackProceedWithoutLogin: () -> Unit
 ) {
     TextButton(
-        onClick = { },
+        onClick = { callbackProceedWithoutLogin() },
         colors = buttonColors(
             backgroundColor = Color.Transparent, contentColor = validationBlack
         ),

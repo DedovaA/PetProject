@@ -57,8 +57,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     password = password.value,
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
-                    callbackLoginValid = viewModel::loginValidation,
-                    callbackLoginAttempt = viewModel::login
+                    callbackLoginValid = viewModel::loginValidation
                 )
                 AuthFormType.registration -> RegisterScreen(
                     callbackName = viewModel::setName,
@@ -73,15 +72,15 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
                     passwordConfValid = passwordConfValid.value,
-                    callbackRegisterValid = viewModel::registerValidation,
-                    callbackLoginAttempt = viewModel::register
+                    callbackRegisterValid = viewModel::registerValidation
                 )
             }
         }
         TransparentButtonWithIcon(
             text = stringResource(R.string.login_later),
             imageResourceId = R.drawable.arrow_back_ios,
-            imageDescriptionId = R.string.arrow_icon_description
+            imageDescriptionId = R.string.arrow_icon_description,
+            callbackProceedWithoutLogin = viewModel::proceedWithoutLogin
         )
     }
 }

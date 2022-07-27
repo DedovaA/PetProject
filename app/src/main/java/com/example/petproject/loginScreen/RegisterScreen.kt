@@ -8,7 +8,6 @@ import com.example.petproject.utils.TextFieldCallback
 import com.example.petproject.viewComponents.buttons.MainButton
 import com.example.petproject.viewComponents.forms.RegisterForm
 
-@Suppress("FunctionNaming")
 @Composable
 fun RegisterScreen(
     callbackName: TextFieldCallback,
@@ -23,8 +22,7 @@ fun RegisterScreen(
     emailValid: Boolean,
     passwordValid: Boolean,
     passwordConfValid: Boolean,
-    callbackRegisterValid: AuthCheckCallback,
-    callbackLoginAttempt: () -> Unit
+    callbackRegisterValid: AuthCheckCallback
 ) {
     RegisterForm(
         callbackName = callbackName,
@@ -44,7 +42,6 @@ fun RegisterScreen(
         text = stringResource(R.string.registration),
         imageResourceId = R.drawable.paw,
         imageDescriptionId = R.string.paw_icon_description,
-        callbackLoginValid = callbackRegisterValid,
-        callbackLoginAttempt
+        callbackLoginValid = callbackRegisterValid
     )
 }

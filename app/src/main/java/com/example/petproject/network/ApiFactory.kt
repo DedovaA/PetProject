@@ -11,10 +11,13 @@ import java.util.concurrent.TimeUnit
 
 class ApiFactory : NetworkLayer {
 
-    private val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
+    companion object {
+        private const val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
+        val timeout = 5
+    }
 
     private val client = OkHttpClient.Builder()
-        .callTimeout(timeout = 5, TimeUnit.SECONDS)
+        .callTimeout(timeout = timeout.toLong(), TimeUnit.SECONDS)
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -47,7 +50,7 @@ class ApiFactory : NetworkLayer {
         val responseLogin = apiService.login(loginData)
         return when (responseLogin.code()) {
             200 -> {
-                println("*** WELLCOME ***")
+                println("*** WELCOME ***")
                 responseLogin.body()
             }
             else -> {
@@ -67,7 +70,7 @@ class ApiFactory : NetworkLayer {
         val responseRegister = apiService.register(registerData)
         return when (responseRegister.code()) {
             200 -> {
-                println("******* WELLCOME *******")
+                println("******* WELCOME *******")
                 responseRegister.body()
             }
             else -> {

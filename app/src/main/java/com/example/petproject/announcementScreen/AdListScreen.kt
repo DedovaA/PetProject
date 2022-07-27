@@ -25,27 +25,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.petproject.AuthViewModel
 import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.*
 import com.example.petproject.repo.DataAnnouncement
-import com.example.petproject.utils.EMPTY_STRING
+import com.example.petproject.statesEnum.PetType
 
 @Composable
-fun AdListScreen(viewModel: AuthViewModel) {
-    val petType = viewModel.petType.observeAsState(EMPTY_STRING)
+fun AdListScreen(viewModel: AdListViewModel) {
+    val petType = viewModel.petType.observeAsState(PetType.All)
     val adList = viewModel.visibleAdList.observeAsState(listOf())
+
+    viewModel.getAdList(petType.value)//TODO переделать на launched effect
 
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        viewModel.getAdList(petType.value)
 
         PetTypeSwitchButtonGroup(
             petType = petType.value,
             callbackPetType = viewModel::switchPetTypeButton,
         )
+
         AdList(
             adList = adList.value!! //TODO перенаправить на пустой экран
         )
@@ -53,7 +54,6 @@ fun AdListScreen(viewModel: AuthViewModel) {
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Preview
 @Composable
 fun AdList(
     adList: List<DataAnnouncement>
@@ -71,20 +71,19 @@ fun AdList(
     )
 }
 
-@Preview
 @Composable
 fun PetTypeButton(
     text: String,
-    type: String,
-    callbackPetType: (String) -> Unit
+    type: PetType,
+    callbackPetType: (PetType) -> Unit
 ) {
     TextButton(
         onClick = {
             callbackPetType(type)
         },
         modifier = Modifier
-                    .fillMaxWidth()
-                    .background(mainBlue),
+            .fillMaxWidth()
+            .background(mainBlue),
         shape = RectangleShape
     ) {
         Text(
@@ -96,11 +95,10 @@ fun PetTypeButton(
     }
 }
 
-@Preview
 @Composable
 fun PetTypeSwitchButtonGroup(
-    petType: String,
-    callbackPetType: (String) -> Unit
+    petType: PetType,
+    callbackPetType: (PetType) -> Unit
 ) {
     var allUnderlined: Dp = 1.dp
     var dogsUnderlined: Dp = 1.dp
@@ -108,9 +106,9 @@ fun PetTypeSwitchButtonGroup(
     var otherUnderlined: Dp = 1.dp
 
     when (petType){
-        "dog" -> dogsUnderlined = 5.dp
-        "cat" -> catsUnderlined = 5.dp
-        "other" -> otherUnderlined = 5.dp
+        PetType.Dogs -> dogsUnderlined = 5.dp
+        PetType.Cats -> catsUnderlined = 5.dp
+        PetType.Other -> otherUnderlined = 5.dp
         else -> allUnderlined = 5.dp
     }
     Row(
@@ -121,8 +119,8 @@ fun PetTypeSwitchButtonGroup(
             contentAlignment = Alignment.BottomCenter
         ) {
             PetTypeButton(
-                text = "Все",
-                type = EMPTY_STRING,
+                text = stringResource(R.string.pet_type_btn_text_all),
+                type = PetType.All,
                 callbackPetType = callbackPetType
             )
             Divider(color = textWhite, thickness = allUnderlined)
@@ -132,8 +130,8 @@ fun PetTypeSwitchButtonGroup(
             contentAlignment = Alignment.BottomCenter
         ) {
             PetTypeButton(
-                text = "Собаки",
-                type = "dog",
+                text = stringResource(R.string.pet_type_btn_text_dogs),
+                type = PetType.Dogs,
                 callbackPetType = callbackPetType
             )
             Divider(color = textWhite, thickness = dogsUnderlined)
@@ -143,8 +141,8 @@ fun PetTypeSwitchButtonGroup(
             contentAlignment = Alignment.BottomCenter
         ) {
             PetTypeButton(
-                text = "Кошки",
-                type = "cat",
+                text = stringResource(R.string.pet_type_btn_text_cats),
+                type = PetType.Cats,
                 callbackPetType = callbackPetType
             )
             Divider(color = textWhite, thickness = catsUnderlined)
@@ -154,8 +152,8 @@ fun PetTypeSwitchButtonGroup(
             contentAlignment = Alignment.BottomCenter
         ) {
             PetTypeButton(
-                text = "Другие",
-                type = "other",
+                text = stringResource(R.string.pet_type_btn_text_other),
+                type = PetType.Other,
                 callbackPetType = callbackPetType
             )
             Divider(color = textWhite, thickness = otherUnderlined)
@@ -163,7 +161,6 @@ fun PetTypeSwitchButtonGroup(
     }
 }
 
-@Preview
 @Composable
 fun PetCard(dataAnnouncement: DataAnnouncement){
     Card(
@@ -190,7 +187,6 @@ fun PetCard(dataAnnouncement: DataAnnouncement){
     }
 }
 
-@Preview
 @Composable
 fun AdPhoto(imageUrl: String) {
     Box(
@@ -207,7 +203,6 @@ fun AdPhoto(imageUrl: String) {
     }
 }
 
-@Preview
 @Composable
 fun AdHeader(header: String) {
     Text(
@@ -220,7 +215,6 @@ fun AdHeader(header: String) {
     )
 }
 
-@Preview
 @Composable
 fun AdDescription(desc: String) {
     Text(
@@ -233,7 +227,6 @@ fun AdDescription(desc: String) {
     )
 }
 
-@Preview
 @Composable
 fun AdLocation(locAddress: String) {
     Box(
@@ -258,14 +251,13 @@ fun AdLocation(locAddress: String) {
         }
     }
 }
-/**
+
 @Preview
 @Composable
-fun NoAdsScreen() {
+fun EmptyAdList() {
     Text(
         text = stringResource(R.string.no_ads_yet),
         color = validationGray,
         style = authFieldTextStyle
     )
 }
- */

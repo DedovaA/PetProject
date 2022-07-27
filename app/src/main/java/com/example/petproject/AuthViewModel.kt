@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.petproject.navigation.AppNavigation
+import com.example.petproject.navigation.mainGraph
 import com.example.petproject.network.NetworkLayer
-import com.example.petproject.repo.*
+import com.example.petproject.repo.LoginData
+import com.example.petproject.repo.prefStorage.PrefService
+import com.example.petproject.repo.RegisterData
 import com.example.petproject.statesEnum.AuthFormType
-import com.example.petproject.statesEnum.PetType
 import com.example.petproject.utils.EMPTY_STRING
 import com.example.petproject.utils.isEmailValid
 import com.example.petproject.utils.isEmptyField
@@ -19,36 +22,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val network: NetworkLayer,
-    private val preferences: PrefService
+    private val preferences: PrefService,
+    private val navigation: AppNavigation
 ) : ViewModel() {
-
-    /**
-     * Announcement List для отображения
-    */
-    private val _visibleAdList = MutableLiveData<List<DataAnnouncement>?>()
-    val visibleAdList: LiveData<List<DataAnnouncement>?> = _visibleAdList
-    private fun setAdList(list: List<DataAnnouncement>?) {
-        _visibleAdList.postValue(list)
-    }
-
-    /**
-     * petType для запросов
-     */
-    private val _petType = MutableLiveData<String>()
-    val petType: LiveData<String> = _petType
-    private fun setPetType(type: String) {
-        _petType.postValue(type)
-    }
-
-    /**
-     * onClick - фильтр списка
-     */
-    fun switchPetTypeButton(petType: String){
-        setPetType(petType)
-//        getAdList(petType)
-    }
-
-
     /**
      * authScreenType (login / registration)
      */
@@ -150,6 +126,7 @@ class AuthViewModel @Inject constructor(
             else -> true
         }
         setPasswordIsValid(passwordState)
+        if (emailState && passwordState) login()
     }
 
     /**
@@ -184,44 +161,38 @@ class AuthViewModel @Inject constructor(
             else -> true
         }
         setPasswordConfirmValid(passwordConfirmState)
-    }
-
-    fun loginAttempt() {
-        viewModelScope.launch {
-            network.healthCheckRequest()
-        }
+        if (nameState && emailState && passwordConfirmState) register()
     }
 
     fun login() {
         viewModelScope.launch {
-            val tokens = network.loginRequest(
-                LoginData(email = _email.value!!, password = _password.value!!)
-            )
+            val tokens = network
+                .loginRequest(
+                    LoginData(email = _email.value!!, password = _password.value!!)
+                )
             if (tokens != null) {
                 preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
+                navigation.navigateTo(mainGraph)
             }
         }
     }
 
-    fun register() {
-        viewModelScope.launch {
-            val tokens = network.registerRequest(
-                RegisterData(
-                    email = _email.value!!,
-                    password = _password.value!!,
-                    userName = _name.value!!,
-                )
-            )
-            if (tokens != null)
-                preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
-        }
+    fun proceedWithoutLogin(){
+        navigation.navigateTo(mainGraph)
     }
 
-    fun getAdList(petType: String){
+    fun register() {
         viewModelScope.launch {
-            val adList = network.getAnnouncementsRequest(petType)
-            if (adList != null)     //TODO NPE
-                setAdList(adList)
+            val tokens = network
+                .registerRequest(
+                    RegisterData(
+                        email = _email.value!!,
+                        password = _password.value!!,
+                        userName = _name.value!!
+                    )
+                )
+            if (tokens != null)
+                preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
         }
     }
 }

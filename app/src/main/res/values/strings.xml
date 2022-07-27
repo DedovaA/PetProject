@@ -13,11 +13,14 @@
     <string name="paw_icon_description">paw icon</string>
     <string name="logo_description">logo</string>
     <string name="arrow_icon_description">arrow_icon</string>
-<!--    <string name="empty_string"> </string>-->
     <string name="error_message_empty_field">Поле не должно быть пустым</string>
     <string name="error_message_email">Неверный формат email. Пример: name@gmail.com</string>
     <string name="error_message_confirm_password">Не совпадает с введенным паролем</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="visibility_icon">Visibility Icon</string>
     <string name="no_ads_yet">Объявлений пока нет</string>
+    <string name="pet_type_btn_text_all">Все</string>
+    <string name="pet_type_btn_text_dogs">Собаки</string>
+    <string name="pet_type_btn_text_cats">Кошки</string>
+    <string name="pet_type_btn_text_other">Другие</string>
 </resources>
