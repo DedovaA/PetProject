@@ -1,4 +1,4 @@
-package com.example.petproject
+package com.example.petproject.authorizationScreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.petproject.navigation.AppNavigation
 import com.example.petproject.navigation.mainGraph
 import com.example.petproject.network.NetworkLayer
+import com.example.petproject.prefStorage.PrefService
 import com.example.petproject.repo.LoginData
-import com.example.petproject.repo.prefStorage.PrefService
 import com.example.petproject.repo.RegisterData
 import com.example.petproject.statesEnum.AuthFormType
 import com.example.petproject.utils.EMPTY_STRING

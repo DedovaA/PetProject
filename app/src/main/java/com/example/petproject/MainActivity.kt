@@ -14,9 +14,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.petproject.announcementScreen.AdListScreen
 import com.example.petproject.announcementScreen.AdListViewModel
-import com.example.petproject.loginScreen.AuthorizationScreen
-import com.example.petproject.navigation.*
-import com.example.petproject.repo.prefStorage.PrefService
+import com.example.petproject.authorizationScreen.AuthViewModel
+import com.example.petproject.authorizationScreen.AuthorizationScreen
+import com.example.petproject.navigation.AppNavigation
+import com.example.petproject.navigation.Screens
+import com.example.petproject.navigation.authGraph
+import com.example.petproject.navigation.mainGraph
+import com.example.petproject.prefStorage.PrefService
 import com.example.petproject.ui.theme.PetProjectTheme
 import com.example.petproject.utils.EMPTY_STRING
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,15 +49,15 @@ class MainActivity : ComponentActivity() {
                 navigation.controller = navigationController
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
                     NavHost(navController = navigationController, startDestination = startRout){
-                        navigation(startDestination = Screen.AuthScreen.name, route = authGraph) {
-                            composable(route = Screen.AuthScreen.name){
+                        navigation(startDestination = Screens.AuthScreens.name, route = authGraph) {
+                            composable(route = Screens.AuthScreens.name){
                                 val authModel = hiltViewModel<AuthViewModel>()
                                 AuthorizationScreen(viewModel = authModel)
                             }
 
                         }
-                        navigation(startDestination = Screen.MainScreen.name, route = mainGraph) {
-                            composable(route = Screen.MainScreen.name){
+                        navigation(startDestination = Screens.MainScreens.name, route = mainGraph) {
+                            composable(route = Screens.MainScreens.name){
                                 val adListModel = hiltViewModel<AdListViewModel>()
                                 AdListScreen(viewModel = adListModel)
                             }

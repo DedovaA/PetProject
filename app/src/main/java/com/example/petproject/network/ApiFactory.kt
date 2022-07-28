@@ -1,6 +1,9 @@
 package com.example.petproject.network
 
-import com.example.petproject.repo.*
+import com.example.petproject.repo.DataAnnouncement
+import com.example.petproject.repo.LoginData
+import com.example.petproject.repo.LoginToken
+import com.example.petproject.repo.RegisterData
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +16,7 @@ class ApiFactory : NetworkLayer {
 
     companion object {
         private const val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
-        val timeout = 5
+        const val timeout = 5
     }
 
     private val client = OkHttpClient.Builder()
@@ -55,7 +58,7 @@ class ApiFactory : NetworkLayer {
             }
             else -> {
                 val errorMessage = when {
-                    responseLogin.code() == 404 -> "User with this creds not found."
+                    responseLogin.code() == 404 -> "User with this cred not found."
                     responseLogin.code() == 415 -> "Unsupported Media Type, or empty body."
                     responseLogin.code() == 422 -> "Wrong JSON format."
                     else -> "Some internal error."
@@ -75,7 +78,7 @@ class ApiFactory : NetworkLayer {
             }
             else -> {
                 val errorMessage = when {
-                    responseRegister.code() == 409 -> "User with this creds already exists."
+                    responseRegister.code() == 409 -> "User with this cred already exists."
                     responseRegister.code() == 415 -> "Unsupported Media Type, or empty body."
                     responseRegister.code() == 422 -> "Wrong JSON format."
                     else -> "Some internal error."

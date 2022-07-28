@@ -1,4 +1,4 @@
-package com.example.petproject.loginScreen
+package com.example.petproject.authorizationScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -7,12 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.petproject.AuthViewModel
 import com.example.petproject.R
 import com.example.petproject.statesEnum.AuthFormType
-import com.example.petproject.viewComponents.Logo
 import com.example.petproject.viewComponents.buttons.LoginSwitchButtonGroup
 import com.example.petproject.viewComponents.buttons.TransparentButtonWithIcon
+import com.example.petproject.viewComponents.logos.Logo
 
 @Composable
 fun AuthorizationScreen(viewModel: AuthViewModel) {

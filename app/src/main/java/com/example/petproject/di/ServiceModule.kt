@@ -5,8 +5,8 @@ import com.example.petproject.navigation.AppNavigation
 import com.example.petproject.navigation.ControllerNavigation
 import com.example.petproject.network.ApiFactory
 import com.example.petproject.network.NetworkLayer
-import com.example.petproject.repo.prefStorage.PrefRepository
-import com.example.petproject.repo.prefStorage.PrefService
+import com.example.petproject.prefStorage.PrefRepository
+import com.example.petproject.prefStorage.PrefService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

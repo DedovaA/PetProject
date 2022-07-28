@@ -1,4 +1,4 @@
-package com.example.petproject.repo.prefStorage
+package com.example.petproject.prefStorage
 
 import android.content.Context
 import android.content.SharedPreferences

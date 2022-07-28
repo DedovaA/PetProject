@@ -1,4 +1,4 @@
-package com.example.petproject.loginScreen
+package com.example.petproject.authorizationScreen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

@@ -8,5 +8,4 @@ class ControllerNavigation: AppNavigation {
     override fun navigateTo(rout: String) {
         controller?.navigate(rout)
     }
-
 }

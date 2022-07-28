@@ -1,9 +1,14 @@
 package com.example.petproject.network
 
-import androidx.lifecycle.LiveData
-import com.example.petproject.repo.*
+import com.example.petproject.repo.DataAnnouncement
+import com.example.petproject.repo.LoginData
+import com.example.petproject.repo.LoginToken
+import com.example.petproject.repo.RegisterData
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("tech/healthcheck")
@@ -17,10 +22,4 @@ interface ApiService {
 
     @GET("announcements")
     suspend fun getAnnouncements(@Query("petType") petType:String): Response<List<DataAnnouncement>?>
-
-//    suspend fun postAnnouncements(
-//        @Query("petType") petType:String,
-//        @Header("Authorization") token: String
-//    ): Response<DataAnnoucement>
-
 }

@@ -44,13 +44,13 @@ class AdListViewModel @Inject constructor(
 
     fun getAdList(petType: PetType){
         viewModelScope.launch {
-            val petType = when(petType){
+            val type = when(petType){
                 PetType.Dogs -> "dog"
                 PetType.Cats -> "cat"
                 PetType.Other -> "other"
                 else -> EMPTY_STRING
             }
-            val adList = network.getAnnouncementsRequest(petType)
+            val adList = network.getAnnouncementsRequest(type)
             if (adList != null)     //TODO NPE
                 setAdList(adList)
         }
