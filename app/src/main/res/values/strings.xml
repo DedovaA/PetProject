@@ -1,22 +1,35 @@
 <resources>
     <string name="app_name">PetProject</string>
-    <string name="login">Войти</string>
-    <string name="registry">Регистрация</string>
+    <!--Small logo-->
+    <string name="logo_description">logo</string>
+    <!--Switcher "Вход/Регистрация"-->
+    <string name="login_switch_btn">Вход</string>
+    <string name="registry_switch_btn">Регистрация</string>
+    <!--Fields of Login/Register Form-->
     <string name="name">Имя</string>
     <string name="email">Email</string>
     <string name="password">Пароль</string>
     <string name="repeat_password">Повторите пароль</string>
-    <string name="login_switch_btn">Вход</string>
-    <string name="registry_switch_btn">Регистрация</string>
-    <string name="registration">Зарегистрироваться</string>
-    <string name="login_later">Войти позже</string>
-    <string name="paw_icon_description">paw icon</string>
-    <string name="logo_description">logo</string>
-    <string name="arrow_icon_description">arrow_icon</string>
-<!--    <string name="empty_string"> </string>-->
+    <string name="visibility_icon">Visibility Icon</string>
+    <!--Fields validation messages-->
     <string name="error_message_empty_field">Поле не должно быть пустым</string>
     <string name="error_message_email">Неверный формат email. Пример: name@gmail.com</string>
     <string name="error_message_confirm_password">Не совпадает с введенным паролем</string>
+    <!--Buttons "Войти"/"Зарегистрироваться"-->
+    <string name="login">Войти</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="paw_icon_description">paw icon</string>
+    <!--Button "Войти позже"-->
+    <string name="login_later">Войти позже</string>
+    <!--Button "Забыли пароль"-->
     <string name="forgot_password">Забыли пароль?</string>
-    <string name="visibility_icon">Visibility Icon</string>
+    <string name="arrow_icon_description">arrow_icon</string>
+    <!--Switcher "Все/Собаки/Кошки/Другие"-->
+    <string name="pet_type_btn_text_all">Все</string>
+    <string name="pet_type_btn_text_dogs">Собаки</string>
+    <string name="pet_type_btn_text_cats">Кошки</string>
+    <string name="pet_type_btn_text_other">Другие</string>
+
+    <string name="no_ads_yet">Объявлений пока нет</string>
+    <!--    <string name="registry">Регистрация</string>-->
 </resources>

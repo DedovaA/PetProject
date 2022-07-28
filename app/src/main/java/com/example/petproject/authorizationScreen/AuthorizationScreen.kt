@@ -1,4 +1,4 @@
-package com.example.petproject.loginScreen
+package com.example.petproject.authorizationScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -7,12 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.petproject.AuthViewModel
 import com.example.petproject.R
 import com.example.petproject.statesEnum.AuthFormType
-import com.example.petproject.viewComponents.Logo
 import com.example.petproject.viewComponents.buttons.LoginSwitchButtonGroup
 import com.example.petproject.viewComponents.buttons.TransparentButtonWithIcon
+import com.example.petproject.viewComponents.logos.Logo
 
 @Composable
 fun AuthorizationScreen(viewModel: AuthViewModel) {
@@ -57,8 +56,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     password = password.value,
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
-                    callbackLoginValid = viewModel::loginValidation,
-                    callbackLoginAttempt = viewModel::login
+                    callbackLoginValid = viewModel::loginValidation
                 )
                 AuthFormType.registration -> RegisterScreen(
                     callbackName = viewModel::setName,
@@ -73,15 +71,15 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
                     passwordConfValid = passwordConfValid.value,
-                    callbackRegisterValid = viewModel::registerValidation,
-                    callbackLoginAttempt = viewModel::register
+                    callbackRegisterValid = viewModel::registerValidation
                 )
             }
         }
         TransparentButtonWithIcon(
             text = stringResource(R.string.login_later),
             imageResourceId = R.drawable.arrow_back_ios,
-            imageDescriptionId = R.string.arrow_icon_description
+            imageDescriptionId = R.string.arrow_icon_description,
+            callbackProceedWithoutLogin = viewModel::proceedWithoutLogin
         )
     }
 }

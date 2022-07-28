@@ -1,5 +1,6 @@
 package com.example.petproject.network
 
+import com.example.petproject.repo.DataAnnouncement
 import com.example.petproject.repo.LoginData
 import com.example.petproject.repo.LoginToken
 import com.example.petproject.repo.RegisterData
@@ -13,10 +14,13 @@ import java.util.concurrent.TimeUnit
 
 class ApiFactory : NetworkLayer {
 
-    private val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
+    companion object {
+        private const val BASE_URL = "https://petsproject.issart.com/api/1.0.0/"
+        const val timeout = 5
+    }
 
     private val client = OkHttpClient.Builder()
-        .callTimeout(timeout = 5, TimeUnit.SECONDS)
+        .callTimeout(timeout = timeout.toLong(), TimeUnit.SECONDS)
         .addInterceptor(
             HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -49,12 +53,12 @@ class ApiFactory : NetworkLayer {
         val responseLogin = apiService.login(loginData)
         return when (responseLogin.code()) {
             200 -> {
-                println("*** WELLCOME ***")
+                println("*** WELCOME ***")
                 responseLogin.body()
             }
             else -> {
                 val errorMessage = when {
-                    responseLogin.code() == 404 -> "User with this creds not found."
+                    responseLogin.code() == 404 -> "User with this cred not found."
                     responseLogin.code() == 415 -> "Unsupported Media Type, or empty body."
                     responseLogin.code() == 422 -> "Wrong JSON format."
                     else -> "Some internal error."
@@ -69,17 +73,37 @@ class ApiFactory : NetworkLayer {
         val responseRegister = apiService.register(registerData)
         return when (responseRegister.code()) {
             200 -> {
-                println("*** WELLCOME ***")
+                println("******* WELCOME *******")
                 responseRegister.body()
             }
             else -> {
                 val errorMessage = when {
-                    responseRegister.code() == 409 -> "User with this creds already exists."
+                    responseRegister.code() == 409 -> "User with this cred already exists."
                     responseRegister.code() == 415 -> "Unsupported Media Type, or empty body."
                     responseRegister.code() == 422 -> "Wrong JSON format."
                     else -> "Some internal error."
                 }
                 println("******* REGISTER ERROR : $errorMessage")
+                null
+            }
+        }
+    }
+
+    override suspend fun getAnnouncementsRequest(petType: String): List<DataAnnouncement>? {
+        val responseAnnouncementList = apiService.getAnnouncements(petType)
+        return when (responseAnnouncementList.code()){
+            200 -> {
+                println("******* ADLIST DOWNLOADED ********")
+                responseAnnouncementList.body()
+            }
+            else -> {
+                val errorMessage = when {
+                    responseAnnouncementList.code() == 415 -> "Unsupported Media Type, or empty body."
+                    responseAnnouncementList.code() == 422 -> "Wrong parameter."
+                    responseAnnouncementList.code() == 426 -> "Token outdated."
+                    else -> "Some internal error."
+                }
+                println("******* ERROR ADLIST DOWNLOAD : $errorMessage")
                 null
             }
         }

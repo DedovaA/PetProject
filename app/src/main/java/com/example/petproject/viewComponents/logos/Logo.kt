@@ -1,4 +1,4 @@
-package com.example.petproject.viewComponents
+package com.example.petproject.viewComponents.logos
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
