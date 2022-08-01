@@ -12,8 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.example.petproject.announcementScreen.AdListScreen
-import com.example.petproject.announcementScreen.AdListViewModel
+import com.example.petproject.announcementScreen.MainViewModel
+import com.example.petproject.announcementScreen.MainScreen
 import com.example.petproject.authorizationScreen.AuthViewModel
 import com.example.petproject.authorizationScreen.AuthorizationScreen
 import com.example.petproject.navigation.AppNavigation
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val startRout = when(prefRepository.getAccessToken()){
+        val startRoute = when(prefRepository.getAccessToken()){
             EMPTY_STRING -> authGraph
             else -> mainGraph
         }
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                 val navigationController = rememberNavController()
                 navigation.controller = navigationController
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-                    NavHost(navController = navigationController, startDestination = startRout){
+                    NavHost(navController = navigationController, startDestination = startRoute){
                         navigation(startDestination = Screens.AuthScreens.name, route = authGraph) {
                             composable(route = Screens.AuthScreens.name){
                                 val authModel = hiltViewModel<AuthViewModel>()
@@ -58,8 +58,8 @@ class MainActivity : ComponentActivity() {
                         }
                         navigation(startDestination = Screens.MainScreens.name, route = mainGraph) {
                             composable(route = Screens.MainScreens.name){
-                                val adListModel = hiltViewModel<AdListViewModel>()
-                                AdListScreen(viewModel = adListModel)
+                                val mainModel = hiltViewModel<MainViewModel>()
+                                MainScreen(viewModel = mainModel)
                             }
                         }
                     }
