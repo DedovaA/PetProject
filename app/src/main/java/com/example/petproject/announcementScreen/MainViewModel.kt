@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AdListViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val network: NetworkLayer
 ) : ViewModel() {
 

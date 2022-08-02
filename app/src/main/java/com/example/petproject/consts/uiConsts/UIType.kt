@@ -46,3 +46,13 @@ val petTypeButtonTextStyle = TextStyle(
     fontSize = 16.sp,
     color = textWhite
 )
+val bottomNavigationTextStyle = TextStyle(
+    fontFamily = FontFamily(Font(R.font.mulish_regular)),
+    fontSize = 12.sp,
+    color = textWhite
+)
+val bottomNavigationSelectedTextStyle = TextStyle(
+    fontFamily = FontFamily(Font(R.font.mulish_extra_bold)),
+    fontSize = 12.sp,
+    color = textWhite
+)
