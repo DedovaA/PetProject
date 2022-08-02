@@ -3,8 +3,12 @@ package com.example.petproject.authorizationScreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.petproject.R
@@ -34,8 +38,11 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+        val focusRequester = remember { FocusRequester() }
+        val focusManager = LocalFocusManager.current
+
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().focusRequester(focusRequester),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
@@ -56,7 +63,8 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     password = password.value,
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
-                    callbackLoginValid = viewModel::loginValidation
+                    callbackLoginValid = viewModel::loginValidation,
+                    callbackClearFocus = {focusManager.clearFocus()}
                 )
                 AuthFormType.registration -> RegisterScreen(
                     callbackName = viewModel::setName,
@@ -71,7 +79,8 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
                     passwordConfValid = passwordConfValid.value,
-                    callbackRegisterValid = viewModel::registerValidation
+                    callbackRegisterValid = viewModel::registerValidation,
+                    callbackClearFocus = {focusManager.clearFocus()}
                 )
             }
         }

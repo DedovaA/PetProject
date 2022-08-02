@@ -9,7 +9,10 @@ import androidx.compose.material.ButtonDefaults.buttonColors
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -23,9 +26,11 @@ fun MainButton(
     imageResourceId: Int = R.drawable.paw,
     imageDescriptionId: Int = R.string.paw_icon_description,
     callbackLoginValid: AuthCheckCallback,
+    callbackClearFocus: () -> Unit
 ) {
     Button(
         onClick = {
+            callbackClearFocus()
             callbackLoginValid()
         },
         modifier = Modifier.padding(top = 8.dp),

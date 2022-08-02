@@ -32,7 +32,8 @@ fun BottomBar(
     BottomAppBar(
         contentColor = Color.White,
         backgroundColor = mainBlue,
-        modifier = Modifier.height(90.dp)
+        modifier = Modifier.height(90.dp),
+        elevation = 2.dp
     ) {
         items.forEach { item ->
             BottomNavigationItem(

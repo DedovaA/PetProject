@@ -1,7 +1,9 @@
 package com.example.petproject.announcementScreen.modes.adList
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -11,6 +13,9 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -112,6 +117,7 @@ fun PetTypeSwitchButtonGroup(
             Divider(color = textWhite, thickness = otherUnderlined)
         }
     }
+    BottomShadow()
 }
 
 @Composable
@@ -120,7 +126,7 @@ fun PetCard(dataAnnouncement: DataAnnouncement){
         modifier = Modifier
             .size(height = 283.dp, width = 168.dp),
         shape = RoundedCornerShape(8.dp),
-        elevation = 1.dp
+        elevation = 8.dp
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -144,7 +150,8 @@ fun PetCard(dataAnnouncement: DataAnnouncement){
 fun AdPhoto(imageUrl: String) {
     Box(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .background(color = petCardBackground),
         contentAlignment = Alignment.Center
     ) {
         AsyncImage(
@@ -203,4 +210,21 @@ fun AdLocation(locAddress: String) {
             )
         }
     }
+}
+
+//shadow line ander status bar
+@Composable
+fun BottomShadow() {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .height(2.dp)
+        .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    statusBarShadow.copy(alpha =  0.2f),
+                    Color.Transparent,
+                )
+            )
+        )
+    )
 }

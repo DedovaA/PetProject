@@ -36,6 +36,15 @@ class MainViewModel @Inject constructor(
     }
 
     /**
+     * progress bar indicator
+     */
+    private val _loadingIndicator = MutableLiveData<Boolean>()
+    val loadingIndicator: LiveData<Boolean> = _loadingIndicator
+    private fun setLoading(loading: Boolean) {
+        _loadingIndicator.postValue(loading)
+    }
+
+    /**
      * onClick - фильтр списка
      */
     fun switchPetTypeButton(petType: PetType){
@@ -51,8 +60,8 @@ class MainViewModel @Inject constructor(
                 else -> EMPTY_STRING
             }
             val adList = network.getAnnouncementsRequest(type)
-            if (adList != null)     //TODO NPE
-                setAdList(adList)
+            setAdList(adList)
+            setLoading(false)
         }
     }
 }

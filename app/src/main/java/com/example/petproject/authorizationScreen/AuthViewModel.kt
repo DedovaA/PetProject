@@ -25,6 +25,7 @@ class AuthViewModel @Inject constructor(
     private val preferences: PrefService,
     private val navigation: AppNavigation
 ) : ViewModel() {
+
     /**
      * authScreenType (login / registration)
      */

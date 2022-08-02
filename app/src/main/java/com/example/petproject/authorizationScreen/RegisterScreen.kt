@@ -22,7 +22,8 @@ fun RegisterScreen(
     emailValid: Boolean,
     passwordValid: Boolean,
     passwordConfValid: Boolean,
-    callbackRegisterValid: AuthCheckCallback
+    callbackRegisterValid: AuthCheckCallback,
+    callbackClearFocus: () -> Unit
 ) {
     RegisterForm(
         callbackName = callbackName,
@@ -42,6 +43,7 @@ fun RegisterScreen(
         text = stringResource(R.string.registration),
         imageResourceId = R.drawable.paw,
         imageDescriptionId = R.string.paw_icon_description,
-        callbackLoginValid = callbackRegisterValid
+        callbackLoginValid = callbackRegisterValid,
+        callbackClearFocus
     )
 }

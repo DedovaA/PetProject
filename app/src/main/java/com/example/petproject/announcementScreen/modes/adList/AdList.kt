@@ -17,7 +17,8 @@ import com.example.petproject.statesEnum.PetType
 @Composable
 fun AdListBox(viewModel: MainViewModel) {
     val petType = viewModel.petType.observeAsState(PetType.All)
-    val adList = viewModel.visibleAdList.observeAsState(listOf())
+    val adList = viewModel.visibleAdList.observeAsState(null)
+    val loadIndicator = viewModel.loadingIndicator.observeAsState(true)
 
     viewModel.getAdList(petType.value)//TODO переделать на launched effect
 
@@ -25,15 +26,14 @@ fun AdListBox(viewModel: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         PetTypeSwitchButtonGroup(
             petType = petType.value,
             callbackPetType = viewModel::switchPetTypeButton,
         )
-
-        AdList(
-            adList = adList.value!! //TODO перенаправить на пустой экран
-        )
+        when(adList.value){
+            null -> LoadingScreen(loading = loadIndicator.value)
+            else -> AdList( adList = adList.value!! )
+        }
     }
 }
 
@@ -43,8 +43,8 @@ fun AdList(
     adList: List<DataAnnouncement>
 ){
     LazyVerticalGrid(
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp),
         cells = GridCells.Fixed(2),
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
         content = {
