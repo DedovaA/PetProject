@@ -41,24 +41,27 @@ fun BottomBar(
                         horizontalAlignment = CenterHorizontally,
                         verticalArrangement = Arrangement.Top
                     ) {
-                        if (currentRoute == item.route) {
-                            Icon(
-                                painterResource(id = item.selectIconId),
-                                contentDescription = item.route
-                            )
-                            Text(
-                                text = item.label,
-                                style = bottomNavigationSelectedTextStyle
-                            )
-                        } else {
-                            Icon(
-                                painterResource(id = item.iconId),
-                                contentDescription = item.route
-                            )
-                            Text(
-                                text = item.label,
-                                style = bottomNavigationTextStyle
-                            )
+                        when (currentRoute) {
+                            item.route -> {
+                                Icon(
+                                    painterResource(id = item.selectIconId),
+                                    contentDescription = item.route
+                                )
+                                Text(
+                                    text = item.label,
+                                    style = bottomNavigationSelectedTextStyle
+                                )
+                            }
+                            else -> {
+                                Icon(
+                                    painterResource(id = item.iconId),
+                                    contentDescription = item.route
+                                )
+                                Text(
+                                    text = item.label,
+                                    style = bottomNavigationTextStyle
+                                )
+                            }
                         }
                     }
                 },
