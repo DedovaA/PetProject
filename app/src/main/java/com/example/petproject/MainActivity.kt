@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.example.petproject.announcementScreen.MainViewModel
+import com.example.petproject.announcementScreen.modes.adList.AdListViewModel
 import com.example.petproject.announcementScreen.MainScreen
 import com.example.petproject.authorizationScreen.AuthViewModel
 import com.example.petproject.authorizationScreen.AuthorizationScreen
@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                         }
                         navigation(startDestination = Screens.MainScreens.name, route = mainGraph) {
                             composable(route = Screens.MainScreens.name){
-                                val mainModel = hiltViewModel<MainViewModel>()
+                                val mainModel = hiltViewModel<AdListViewModel>()
                                 MainScreen(viewModel = mainModel)
                             }
                         }

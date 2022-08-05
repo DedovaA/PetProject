@@ -31,5 +31,7 @@
     <string name="pet_type_btn_text_other">Другие</string>
 
     <string name="no_ads_yet">Объявлений пока нет</string>
+    <string name="arrow_icon">arrow icon</string>
+    <string name="upload_file_icon">upload file icon</string>
     <!--    <string name="registry">Регистрация</string>-->
 </resources>

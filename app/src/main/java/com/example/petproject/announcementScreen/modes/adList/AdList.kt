@@ -10,36 +10,37 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.petproject.announcementScreen.MainViewModel
 import com.example.petproject.repo.DataAnnouncement
 import com.example.petproject.statesEnum.PetType
 
 @Composable
-fun AdListBox(viewModel: MainViewModel) {
+fun AdList(viewModel: AdListViewModel) {
     val petType = viewModel.petType.observeAsState(PetType.All)
     val adList = viewModel.visibleAdList.observeAsState(null)
     val loadIndicator = viewModel.loadingIndicator.observeAsState(true)
 
     viewModel.getAdList(petType.value)//TODO переделать на launched effect
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        PetTypeSwitchButtonGroup(
-            petType = petType.value,
-            callbackPetType = viewModel::switchPetTypeButton,
-        )
-        when(adList.value){
-            null -> LoadingScreen(loading = loadIndicator.value)
-            else -> AdList( adList = adList.value!! )
+    Box(modifier = Modifier.fillMaxSize()){
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            PetTypeSwitchButtonGroup(
+                petType = petType.value,
+                callbackPetType = viewModel::switchPetTypeButton,
+            )
+            when(adList.value){
+                null -> LoadingScreen(loading = loadIndicator.value)
+                else -> List( adList = adList.value!! )
+            }
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AdList(
+fun List(
     adList: List<DataAnnouncement>
 ){
     LazyVerticalGrid(

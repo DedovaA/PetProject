@@ -5,7 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.petproject.R
 import com.example.petproject.utils.AuthCheckCallback
 import com.example.petproject.utils.TextFieldCallback
-import com.example.petproject.viewComponents.buttons.MainButton
+import com.example.petproject.viewComponents.buttons.MainButtonWithStarIcon
 import com.example.petproject.viewComponents.forms.RegisterForm
 
 @Composable
@@ -22,8 +22,7 @@ fun RegisterScreen(
     emailValid: Boolean,
     passwordValid: Boolean,
     passwordConfValid: Boolean,
-    callbackRegisterValid: AuthCheckCallback,
-    callbackClearFocus: () -> Unit
+    callbackOnClick: AuthCheckCallback
 ) {
     RegisterForm(
         callbackName = callbackName,
@@ -39,11 +38,10 @@ fun RegisterScreen(
         passwordValid = passwordValid,
         passwordConfValid = passwordConfValid
     )
-    MainButton(
-        text = stringResource(R.string.registration),
-        imageResourceId = R.drawable.paw,
-        imageDescriptionId = R.string.paw_icon_description,
-        callbackLoginValid = callbackRegisterValid,
-        callbackClearFocus
+    MainButtonWithStarIcon(
+        textButton = stringResource(R.string.registration),
+        iconResourceId = R.drawable.paw,
+        iconDescription = stringResource(id = R.string.paw_icon_description),
+        callbackOnClick = callbackOnClick
     )
 }

@@ -1,9 +1,7 @@
 package com.example.petproject.announcementScreen.modes.adList
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -13,7 +11,6 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -40,13 +37,14 @@ fun PetTypeButton(
             callbackPetType(type)
         },
         modifier = Modifier
-            .fillMaxWidth()
+//            .fillMaxWidth()
+            .fillMaxSize()
             .background(mainBlue),
         shape = RectangleShape
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(vertical = 16.dp),
+//            modifier = Modifier.padding(vertical = 16.dp),
             style = petTypeButtonTextStyle,
             textAlign = TextAlign.Center
         )
@@ -70,7 +68,7 @@ fun PetTypeSwitchButtonGroup(
         else -> allUnderlined = 5.dp
     }
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().height(64.dp)
     ) {
         Box(
             modifier = Modifier.weight(1.0f),
@@ -81,7 +79,7 @@ fun PetTypeSwitchButtonGroup(
                 type = PetType.All,
                 callbackPetType = callbackPetType
             )
-            Divider(color = textWhite, thickness = allUnderlined)
+            Divider(color = white, thickness = allUnderlined)
         }
         Box(
             modifier = Modifier.weight(1.0f),
@@ -92,7 +90,7 @@ fun PetTypeSwitchButtonGroup(
                 type = PetType.Dogs,
                 callbackPetType = callbackPetType
             )
-            Divider(color = textWhite, thickness = dogsUnderlined)
+            Divider(color = white, thickness = dogsUnderlined)
         }
         Box(
             modifier = Modifier.weight(1.0f),
@@ -103,7 +101,7 @@ fun PetTypeSwitchButtonGroup(
                 type = PetType.Cats,
                 callbackPetType = callbackPetType
             )
-            Divider(color = textWhite, thickness = catsUnderlined)
+            Divider(color = white, thickness = catsUnderlined)
         }
         Box(
             modifier = Modifier.weight(1.0f),
@@ -114,7 +112,7 @@ fun PetTypeSwitchButtonGroup(
                 type = PetType.Other,
                 callbackPetType = callbackPetType
             )
-            Divider(color = textWhite, thickness = otherUnderlined)
+            Divider(color = white, thickness = otherUnderlined)
         }
     }
     BottomShadow()
@@ -198,7 +196,7 @@ fun AdLocation(locAddress: String) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.paw_location_icon_24),
+                painter = painterResource(id = R.drawable.paw_on_pet_card_location_icon_24),
                 contentDescription = "location icon",
                 modifier = Modifier.padding(end = 4.dp)
             )

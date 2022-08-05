@@ -1,4 +1,4 @@
-package com.example.petproject.announcementScreen
+package com.example.petproject.announcementScreen.modes.adList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class AdListViewModel @Inject constructor(
     private val network: NetworkLayer
 ) : ViewModel() {
 

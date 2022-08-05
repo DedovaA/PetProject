@@ -5,7 +5,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.petproject.R
 import com.example.petproject.utils.AuthCheckCallback
 import com.example.petproject.utils.TextFieldCallback
-import com.example.petproject.viewComponents.buttons.MainButton
+import com.example.petproject.viewComponents.buttons.MainButtonWithStarIcon
 import com.example.petproject.viewComponents.buttons.TransparentButton
 import com.example.petproject.viewComponents.forms.LoginForm
 
@@ -17,8 +17,7 @@ fun LoginScreen(
     password: String,
     emailValid: Boolean,
     passwordValid: Boolean,
-    callbackLoginValid: AuthCheckCallback,
-    callbackClearFocus: () -> Unit
+    callbackOnClick: AuthCheckCallback
 ) {
     LoginForm(
         callbackEmail,
@@ -28,12 +27,11 @@ fun LoginScreen(
         emailValid,
         passwordValid
     )
-    MainButton(
-        text = stringResource(R.string.login),
-        imageResourceId = R.drawable.paw,
-        imageDescriptionId = R.string.paw_icon_description,
-        callbackLoginValid,
-        callbackClearFocus
+    MainButtonWithStarIcon(
+        textButton = stringResource(R.string.login),
+        iconResourceId = R.drawable.paw,
+        iconDescription = stringResource(id = R.string.paw_icon_description),
+        callbackOnClick = callbackOnClick
     )
     TransparentButton(
         text = stringResource(R.string.forgot_password)

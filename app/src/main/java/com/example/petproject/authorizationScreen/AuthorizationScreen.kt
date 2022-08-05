@@ -31,6 +31,8 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
     val passwordValid = viewModel.passwordIsValid.observeAsState(true)
     val passwordConfValid = viewModel.passwordConfirmIsValid.observeAsState(true)
 
+    val fieldFocus = viewModel.focusEnable.observeAsState(true)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,8 +40,10 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+
         val focusRequester = remember { FocusRequester() }
         val focusManager = LocalFocusManager.current
+        if(!fieldFocus.value)focusManager.clearFocus()
 
         Column(
             modifier = Modifier.fillMaxWidth().focusRequester(focusRequester),
@@ -63,8 +67,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     password = password.value,
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
-                    callbackLoginValid = viewModel::loginValidation,
-                    callbackClearFocus = {focusManager.clearFocus()}
+                    callbackOnClick = viewModel::loginValidation
                 )
                 AuthFormType.registration -> RegisterScreen(
                     callbackName = viewModel::setName,
@@ -79,8 +82,7 @@ fun AuthorizationScreen(viewModel: AuthViewModel) {
                     emailValid = emailValid.value,
                     passwordValid = passwordValid.value,
                     passwordConfValid = passwordConfValid.value,
-                    callbackRegisterValid = viewModel::registerValidation,
-                    callbackClearFocus = {focusManager.clearFocus()}
+                    callbackOnClick = viewModel::registerValidation
                 )
             }
         }

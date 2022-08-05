@@ -27,6 +27,15 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
 
     /**
+     * auth fields focus flag
+     */
+    private val _focusEnable = MutableLiveData<Boolean>()
+    val focusEnable: LiveData<Boolean> = _focusEnable
+    private fun setFocusEnable(focus: Boolean) {
+        _focusEnable.postValue(focus)
+    }
+
+    /**
      * authScreenType (login / registration)
      */
     private val _authFormType = MutableLiveData<AuthFormType>()
@@ -127,7 +136,10 @@ class AuthViewModel @Inject constructor(
             else -> true
         }
         setPasswordIsValid(passwordState)
-        if (emailState && passwordState) login()
+        if (emailState && passwordState) {
+            setFocusEnable(false)
+            login()
+        }
     }
 
     /**
@@ -162,7 +174,10 @@ class AuthViewModel @Inject constructor(
             else -> true
         }
         setPasswordConfirmValid(passwordConfirmState)
-        if (nameState && emailState && passwordConfirmState) register()
+        if (nameState && emailState && passwordConfirmState) {
+            setFocusEnable(false)
+            register()
+        }
     }
 
     fun login() {
@@ -174,7 +189,7 @@ class AuthViewModel @Inject constructor(
             if (tokens != null) {
                 preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
                 navigation.navigateTo(mainGraph)
-            }
+            } else setFocusEnable(true)
         }
     }
 
@@ -192,8 +207,9 @@ class AuthViewModel @Inject constructor(
                         userName = _name.value!!
                     )
                 )
-            if (tokens != null)
+            if (tokens != null) {
                 preferences.saveTokens(tokens.accessToken, tokens.refreshToken)
+            } else setFocusEnable(true)
         }
     }
 }

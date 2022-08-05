@@ -1,29 +1,35 @@
 package com.example.petproject.viewComponents.buttons
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ButtonDefaults.buttonColors
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.petproject.consts.uiConsts.*
 
-//@Preview
 @Composable
-fun MainButton(
-    text: String = "На карте",
-    callback: () -> Unit
+fun MainButtonWithStarIcon(
+    textButton: String,
+    iconResourceId: Int,
+    iconDescription: String,
+    callbackOnClick: () -> Unit
 ) {
     Button(
         onClick = {
-                  callback()
+            callbackOnClick()
         },
         modifier = Modifier
             .padding(top = 8.dp)
             .height(56.dp),
-        colors = ButtonDefaults.buttonColors(
+        colors = buttonColors(
             backgroundColor = mainBlue, contentColor = white
         ),
         elevation = ButtonDefaults.elevation(
@@ -32,8 +38,13 @@ fun MainButton(
         shape = smallShape,
         contentPadding = buttonContentPadding
     ) {
+        Icon(
+            painter = painterResource(iconResourceId),
+            contentDescription = iconDescription,
+        )
+        Spacer(modifier = Modifier.size(12.dp))
         Text(
-            text = text, style = mainButtonTextStyle
+            text = textButton, style = mainButtonTextStyle
         )
     }
 }
