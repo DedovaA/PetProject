@@ -1,9 +1,9 @@
 package com.example.petproject.network
 
-import com.example.petproject.repo.DataAnnouncement
-import com.example.petproject.repo.LoginData
-import com.example.petproject.repo.LoginToken
-import com.example.petproject.repo.RegisterData
+import com.example.petproject.model.DataAnnouncement
+import com.example.petproject.model.LoginData
+import com.example.petproject.model.LoginToken
+import com.example.petproject.model.RegisterData
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -93,7 +93,7 @@ class ApiFactory : NetworkLayer {
         val responseAnnouncementList = apiService.getAnnouncements(petType)
         return when (responseAnnouncementList.code()){
             200 -> {
-                println("******* ADLIST DOWNLOADED ********")
+                println("******* AD LIST DOWNLOADED ********")
                 responseAnnouncementList.body()
             }
             else -> {
@@ -103,7 +103,7 @@ class ApiFactory : NetworkLayer {
                     responseAnnouncementList.code() == 426 -> "Token outdated."
                     else -> "Some internal error."
                 }
-                println("******* ERROR ADLIST DOWNLOAD : $errorMessage")
+                println("******* ERROR AD LIST DOWNLOAD : $errorMessage")
                 null
             }
         }

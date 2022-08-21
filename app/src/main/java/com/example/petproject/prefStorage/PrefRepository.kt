@@ -2,7 +2,7 @@ package com.example.petproject.prefStorage
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.petproject.utils.EMPTY_STRING
+import com.example.petproject.consts.uiConsts.EMPTY_STRING
 import javax.inject.Inject
 
 class PrefRepository @Inject constructor(private val context: Context) : PrefService {

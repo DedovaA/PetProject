@@ -6,7 +6,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import com.example.petproject.R
 
-// Set of Material typography styles to start with
 val mainButtonTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_bold)),
     fontSize = 16.sp,

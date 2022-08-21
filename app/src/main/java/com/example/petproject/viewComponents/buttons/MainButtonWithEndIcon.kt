@@ -14,7 +14,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.petproject.consts.uiConsts.*
 
-//@Preview
 @Composable
 fun MainButtonWithEndIcon(
     textButton: String,
@@ -23,8 +22,7 @@ fun MainButtonWithEndIcon(
     callbackOnClick: () -> Unit
 ) {
     Button(
-        onClick = {
-        },
+        onClick = {  },
         modifier = Modifier
             .padding(top = 8.dp)
             .height(56.dp),

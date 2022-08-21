@@ -1,12 +1,17 @@
 package com.example.petproject.viewComponents.buttons
 
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.petproject.consts.uiConsts.*
+import com.example.petproject.consts.uiConsts.buttonIconContentPadding
+import com.example.petproject.consts.uiConsts.mainBlue
+import com.example.petproject.consts.uiConsts.smallShape
+import com.example.petproject.consts.uiConsts.white
 
 @Composable
 fun ButtonIcon(

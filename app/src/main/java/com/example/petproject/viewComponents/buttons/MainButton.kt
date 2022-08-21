@@ -10,10 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.petproject.consts.uiConsts.*
 
-//@Preview
 @Composable
 fun MainButton(
-    text: String = "На карте",
+    text: String,
     callback: () -> Unit
 ) {
     Button(

@@ -12,17 +12,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.example.petproject.announcementScreen.modes.adList.AdListViewModel
-import com.example.petproject.announcementScreen.MainScreen
-import com.example.petproject.authorizationScreen.AuthViewModel
-import com.example.petproject.authorizationScreen.AuthorizationScreen
+import com.example.petproject.mainScreen.MainScreenViewModel
+import com.example.petproject.mainScreen.MainScreen
+import com.example.petproject.authScreen.AuthViewModel
+import com.example.petproject.authScreen.AuthorizationScreen
 import com.example.petproject.navigation.AppNavigation
 import com.example.petproject.navigation.Screens
 import com.example.petproject.navigation.authGraph
 import com.example.petproject.navigation.mainGraph
 import com.example.petproject.prefStorage.PrefService
 import com.example.petproject.ui.theme.PetProjectTheme
-import com.example.petproject.utils.EMPTY_STRING
+import com.example.petproject.consts.uiConsts.EMPTY_STRING
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                         }
                         navigation(startDestination = Screens.MainScreens.name, route = mainGraph) {
                             composable(route = Screens.MainScreens.name){
-                                val mainModel = hiltViewModel<AdListViewModel>()
+                                val mainModel = hiltViewModel<MainScreenViewModel>()
                                 MainScreen(viewModel = mainModel)
                             }
                         }

@@ -9,8 +9,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -18,22 +16,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.petproject.consts.uiConsts.*
 import com.example.petproject.statesEnum.PetIconButtonType
+import com.example.petproject.statesEnum.PetType
 
 @Composable
 fun PetButtonIconVertical(
+    lostPetType: PetType,
     petIconButtonType: PetIconButtonType,
-    callbackPetIconType: ( PetIconButtonType) -> Unit
+    callbackPetType: (PetType) -> Unit
 ) {
-    val isChecked = remember{ mutableStateOf(false)}
-
     Button(
         onClick = {
-            callbackPetIconType(petIconButtonType)
-            isChecked.value = !isChecked.value
+            callbackPetType(petIconButtonType.iconType)
         },
         modifier = Modifier
             .size(96.dp),
-        colors = when(isChecked.value){
+        colors = when(lostPetType == petIconButtonType.iconType){
             true -> {
                 ButtonDefaults.buttonColors(backgroundColor = sand, contentColor = white)
             }

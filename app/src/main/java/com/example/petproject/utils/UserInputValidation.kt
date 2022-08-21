@@ -11,3 +11,7 @@ fun isEmailValid(email: String): Boolean {
 }
 
 fun isPasswordMatch(password: String, passConfirm: String) = password == passConfirm
+
+fun isTextLengthValid(text: String): Boolean {
+    return text.length <= 46
+}
