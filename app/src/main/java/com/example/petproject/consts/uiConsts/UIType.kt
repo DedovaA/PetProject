@@ -6,11 +6,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
 import com.example.petproject.R
 
-// Set of Material typography styles to start with
 val mainButtonTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_bold)),
     fontSize = 16.sp,
-    color = textWhite
+    color = white
 )
 val loginSwitchButtonTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_bold)),
@@ -44,15 +43,20 @@ val adLocationTextStyle = TextStyle(
 val petTypeButtonTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_semi_bold)),
     fontSize = 16.sp,
-    color = textWhite
+    color = white
 )
 val bottomNavigationTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_regular)),
     fontSize = 12.sp,
-    color = textWhite
+    color = white
 )
 val bottomNavigationSelectedTextStyle = TextStyle(
     fontFamily = FontFamily(Font(R.font.mulish_extra_bold)),
     fontSize = 12.sp,
-    color = textWhite
+    color = white
+)
+val topBarTextStyle = TextStyle(
+    fontFamily = FontFamily(Font(R.font.mulish_bold)),
+    fontSize = 20.sp,
+    color = white
 )

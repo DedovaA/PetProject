@@ -1,9 +1,9 @@
 package com.example.petproject.network
 
-import com.example.petproject.repo.DataAnnouncement
-import com.example.petproject.repo.LoginData
-import com.example.petproject.repo.LoginToken
-import com.example.petproject.repo.RegisterData
+import com.example.petproject.model.DataAnnouncement
+import com.example.petproject.model.LoginData
+import com.example.petproject.model.LoginToken
+import com.example.petproject.model.RegisterData
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

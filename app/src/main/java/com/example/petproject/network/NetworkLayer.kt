@@ -1,6 +1,6 @@
 package com.example.petproject.network
 
-import com.example.petproject.repo.*
+import com.example.petproject.model.*
 
 interface NetworkLayer {
     suspend fun healthCheckRequest()

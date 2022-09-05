@@ -17,8 +17,8 @@ import com.example.petproject.R
 import com.example.petproject.consts.uiConsts.loginSwitchButtonTextStyle
 import com.example.petproject.consts.uiConsts.mainBlue
 import com.example.petproject.consts.uiConsts.validationBlack
-import com.example.petproject.utils.AuthTypeCallback
 import com.example.petproject.statesEnum.AuthFormType
+import com.example.petproject.utils.AuthTypeCallback
 
 @Composable
 fun LoginSwitchButtonGroup(
@@ -44,7 +44,7 @@ fun LoginSwitchButtonGroup(
         ) {
             LoginSwitchButton(
                 text = stringResource(R.string.login_switch_btn),
-                type = AuthFormType.login,
+                type = AuthFormType.Login,
                 callback = callback
             )
             Divider(color = mainBlue, thickness = firstUnderLine)
@@ -55,7 +55,7 @@ fun LoginSwitchButtonGroup(
         ) {
             LoginSwitchButton(
                 text = stringResource(R.string.registry_switch_btn),
-                type = AuthFormType.registration,
+                type = AuthFormType.Registration,
                 callback = callback
             )
             Divider(color = mainBlue, thickness = secondUnderLine)

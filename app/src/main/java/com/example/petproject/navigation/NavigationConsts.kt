@@ -1,8 +1,8 @@
 package com.example.petproject.navigation
 
-//routes
+//route to AuthScreen
 const val authGraph = "AuthGraph"
-
+//route to MainScreen.BottomBar
 const val mainGraph = "MainGraph"
 const val createAd = "CreateAd"
 const val profile = "Profile"
